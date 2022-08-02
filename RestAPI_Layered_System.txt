@@ -1,0 +1,16 @@
+﻿ Joseph Walker
+ 
+ Rest_API: Layered System:
+
+
+Although Rest APIs have many components, here we will be touching on its layered system. 
+This system consists of numerous layers that work in cohesion and form a hierarchy. 
+This multi-layered structure allows for encapsulation as well as scalability. 
+Encapsulation because components with the layers receive zero interaction from outside layers. 
+Scalability due to the fact that the layers can share resource caches.
+
+
+Furthermore, this layered system is an architecture of servers where we can deploy the APIs on server 1, 
+store data on server 2, and have requests authenticated on server 3 for example. There could be any 
+number of layers fulfilling various roles, ranging from load-balancing, storing data, a security layer, etc. 
+Best of all, the client is oblivious to the number of layers due to the efficiency of this architecture overall.
