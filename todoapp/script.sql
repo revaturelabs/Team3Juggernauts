@@ -6,20 +6,20 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE IF NOT EXISTS teams (
-    team_id INTEGER GENERATED ALWAYS AS IDENTITY,
+CREATE TABLE IF NOT EXISTS groups (
+    group_id INTEGER GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(32) NOT NULL,
-    PRIMARY KEY (team_id)
+    PRIMARY KEY (group_id)
 );
 
-CREATE TABLE IF NOT EXISTS teammates (
-    teammate_id INTEGER GENERATED ALWAYS AS IDENTITY,
+CREATE TABLE IF NOT EXISTS group_members (
+    group_member_id INTEGER GENERATED ALWAYS AS IDENTITY,
     is_admin BOOLEAN DEFAULT FALSE,
     user_id INTEGER NOT NULL,
-    team_id INTEGER NOT NULL,
+    group_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (user_id),
-    FOREIGN KEY (team_id) REFERENCES teams (team_id),
-    PRIMARY KEY (teammate_id)
+    FOREIGN KEY (group_id) REFERENCES groups (group_id),
+    PRIMARY KEY (group_member_id)
 );
 
 CREATE TABLE IF NOT EXISTS tasks (
