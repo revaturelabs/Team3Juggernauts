@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
     @RestController
-    @RequestMapping("produce")
+    @RequestMapping("users")
     public class UserController {
 
         @Value("${server.port}")
