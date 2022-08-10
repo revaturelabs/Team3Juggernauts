@@ -24,15 +24,13 @@ CREATE TABLE IF NOT EXISTS teammates (
 
 CREATE TABLE IF NOT EXISTS tasks (
     task_id INTEGER GENERATED ALWAYS AS IDENTITY,
+    user_id INTEGER NOT NULL,
     name VARCHAR(32) NOT NULL,
     category VARCHAR(32) NOT NULL,
     complete_by DATE NOT NULL,
     is_done BOOLEAN DEFAULT FALSE,
-    team_id INTEGER,
-    user_id INTEGER,
     description TEXT,
-    amount_of_time INTEGER,
+    repeats_every INTEGER,
     remind_by INTEGER,
-    FOREIGN KEY (team_id) REFERENCES teams (team_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
