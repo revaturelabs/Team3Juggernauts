@@ -16,7 +16,7 @@ public class Task {
     private String category;
     private Date completeBy;
     private boolean isDone;
-    private String description;
+    private String description; // Can be null, description not required during creation
     private int repeatsEvery;
     private int remindBy;
 }

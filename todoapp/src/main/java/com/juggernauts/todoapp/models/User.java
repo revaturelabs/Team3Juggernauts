@@ -12,7 +12,10 @@ import java.util.List;
 
 public class User {
     private int id;
+    /*
+    email will replace username
     private String username;
+     */
     private String password;
     private String email;
 }
