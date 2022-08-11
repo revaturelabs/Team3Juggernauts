@@ -1,13 +1,29 @@
 package com.juggernauts.todoapp.models;
 
-import java.util.List;
+import org.hibernate.annotations.GeneratorType;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String password;
     private String email;
+    private boolean verifyEmail;
 
     public User() {
+    }
+
+    public User(int id, String password, String email, boolean verifyEmail) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.verifyEmail = verifyEmail;
     }
 
     public User(int id, String password, String email) {
@@ -40,12 +56,21 @@ public class User {
         this.email = email;
     }
 
+    public boolean isVerifyEmail() {
+        return verifyEmail;
+    }
+
+    public void setVerifyEmail(boolean verifyEmail) {
+        this.verifyEmail = verifyEmail;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", verifyEmail=" + verifyEmail +
                 '}';
     }
 }
