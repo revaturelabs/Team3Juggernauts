@@ -9,9 +9,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
-
     private int userId;
-
     private String categoryName;
 
     public Category() {
