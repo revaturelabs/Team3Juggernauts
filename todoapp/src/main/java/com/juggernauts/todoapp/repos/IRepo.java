@@ -23,4 +23,4 @@ import java.util.List;
         public abstract List<T> getAll();
     }
 
-}
+

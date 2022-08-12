@@ -14,7 +14,8 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groupId;
-    @Column(length=256, nullable=false, unique=true)
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(32)")
     private String name;
 
 }

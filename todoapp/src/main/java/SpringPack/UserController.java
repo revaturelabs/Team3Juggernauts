@@ -33,19 +33,19 @@ import java.util.stream.Collectors;
         }
 
         private List<User> users = new ArrayList<>(Arrays.asList(
-                new User(1, "password1", "John@gmail.com" ),
-                new User(2, "password2", "Jane@gmail.com")
+                new User(1, "password1", "John@gmail.com", true ),
+                new User(2, "password2", "Jane@gmail.com", true)
         ));
 
-        @GetMapping(users = MediaType.APPLICATION_JSON_VALUE)
+        @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity getAllUser(){
-            List<UserRepo> user = userRepo.findAll();
+            List<User> user = userRepo.getAll();
             return ResponseEntity.ok(user);
         }
 
         @GetMapping(path="{email}")
         public ResponseEntity getUserById(@PathVariable("email") String email) {
-            Optional<User> user = userRepo.findByName(email);
+            Optional<User> user = Optional.ofNullable(userRepo.get(email));
 
             if(user.isPresent()) {
                 return ResponseEntity.ok(user.get());
