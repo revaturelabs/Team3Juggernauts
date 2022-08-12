@@ -1,67 +1,29 @@
 package com.juggernauts.todoapp.models;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "group_members")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class GroupMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="group_member_id")
     private int groupMemberId;
+
+    @Column(name = "is_admin",columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isAdmin;
+
+    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
     private int userId;
+
+    @Column(name = "group_id", nullable = false, columnDefinition = "INTEGER")
     private int groupId;
-
-    public GroupMember() {
-    }
-
-    public GroupMember(int groupMemberId, boolean isAdmin, int userId, int groupId) {
-        this.groupMemberId = groupMemberId;
-        this.isAdmin = isAdmin;
-        this.userId = userId;
-        this.groupId = groupId;
-    }
-
-    public int getGroupMemberId() {
-        return groupMemberId;
-    }
-
-    public void setGroupMemberId(int groupMemberId) {
-        this.groupMemberId = groupMemberId;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    @Override
-    public String toString() {
-        return "GroupMember{" +
-                "groupMemberId=" + groupMemberId +
-                ", isAdmin=" + isAdmin +
-                ", userId=" + userId +
-                ", groupId=" + groupId +
-                '}';
-    }
 }
