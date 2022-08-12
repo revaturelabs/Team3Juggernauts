@@ -24,4 +24,12 @@ public class Category {
 
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(32) CHECK (name != 'Complete')")
     private String categoryName;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
 }
