@@ -1,0 +1,29 @@
+package com.juggernauts.todoapp.models;
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "reminders")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class Reminder {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int remindId;
+
+    @Column(name = "remind_by", columnDefinition = "DATE")
+    private Date remindBy;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
+    private Task task;
+
+}
