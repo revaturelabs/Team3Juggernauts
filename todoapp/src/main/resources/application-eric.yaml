@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: jrcode
+    password: firstDatabasePassw0rd
+    url: jdbc:postgresql://first-database.ca2hagivlgin.us-east-2.rds.amazonaws.com:5432/todo
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE2
