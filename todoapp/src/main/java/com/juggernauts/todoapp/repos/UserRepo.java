@@ -1,37 +1,23 @@
 package com.juggernauts.todoapp.repos;
 
 import com.juggernauts.todoapp.models.User;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
-public class UserRepo extends IRepo<User>{
-    @Override
-    public int register(User user) {
-        return 0;
-    }
+@Repository
+public interface UserRepo extends JpaRepository<User, Integer> {
+    @Query(value="From users where email like :email")
+    List<User> findAll(@Param("type") String email);
 
-    @Override
-    public int login(String username, String password) {
-        return 0;
-    }
-
-    @Override
-    public String viewProfile(String username) {
-        return null;
-    }
-
-    @Override
-    public String updateProfile(String username, String password, String email) {
-        return null;
-    }
-
-    @Override
-    public User get(String username) {
-        return null;
-    }
-
-    @Override
-    public List<User> getAll() {
-        return null;
-    }
 }
