@@ -11,7 +11,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class VerifyEmail {
+public class EmailVerification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
