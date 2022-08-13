@@ -1,6 +1,5 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.Group;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.services.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class ReminderController {
     ReminderService reminderService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewReminder(@RequestBody Reminder reminder) {
+    public ResponseEntity<Reminder> createNewReminder(@RequestBody Reminder reminder) {
         reminderService.addReminder(reminder);
         return ResponseEntity.ok(reminder);
     };

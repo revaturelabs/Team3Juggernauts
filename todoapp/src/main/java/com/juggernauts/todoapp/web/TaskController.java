@@ -1,8 +1,6 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
-import com.juggernauts.todoapp.services.ReminderService;
 import com.juggernauts.todoapp.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,7 +19,7 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewTask(@RequestBody Task task) {
+    public ResponseEntity<Task> createNewTask(@RequestBody Task task) {
         taskService.addTask(task);
         return ResponseEntity.ok(task);
     };

@@ -1,8 +1,6 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.EmailVerification;
-import com.juggernauts.todoapp.services.CategoryService;
 import com.juggernauts.todoapp.services.EmailVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,7 +19,7 @@ public class EmailVerificationController {
     EmailVerificationService emailVerificationService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewEmailVerification(@RequestBody EmailVerification emailVerification) {
+    public ResponseEntity<EmailVerification> createNewEmailVerification(@RequestBody EmailVerification emailVerification) {
         emailVerificationService.addEmailVerification(emailVerification);
         return ResponseEntity.ok(emailVerification);
     };

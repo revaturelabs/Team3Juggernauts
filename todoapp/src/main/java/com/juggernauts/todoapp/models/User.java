@@ -1,7 +1,8 @@
 package com.juggernauts.todoapp.models;
 
 import lombok.*;
-import org.hibernate.annotations.GeneratorType;
+
+import java.io.Serializable;
 
 import javax.persistence.*;
 
@@ -12,8 +13,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -28,9 +28,9 @@ public class User {
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean emailVerified;
 
-    public User(int id, String password, String email) {
-        this.id = id;
+    public User(String password, String email, boolean emailVerified) {
         this.password = password;
         this.email = email;
+        this.emailVerified = emailVerified;
     }
 }

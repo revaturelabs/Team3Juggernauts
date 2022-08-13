@@ -1,8 +1,6 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
-import com.juggernauts.todoapp.services.TaskService;
 import com.juggernauts.todoapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,7 +19,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewUser(@RequestBody User user) {
+    public ResponseEntity<User> createNewUser(@RequestBody User user) {
         userService.addUser(user);
         return ResponseEntity.ok(user);
     };

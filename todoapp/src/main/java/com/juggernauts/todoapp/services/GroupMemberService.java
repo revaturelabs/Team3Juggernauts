@@ -1,8 +1,6 @@
 package com.juggernauts.todoapp.services;
 
-import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.GroupMember;
-import com.juggernauts.todoapp.repos.EmailVerificationRepo;
 import com.juggernauts.todoapp.repos.GroupMemberRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

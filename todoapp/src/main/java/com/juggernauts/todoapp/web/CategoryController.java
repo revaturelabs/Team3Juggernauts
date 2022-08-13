@@ -16,7 +16,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewCategory(@RequestBody Category category) {
+    public ResponseEntity<Category> createNewCategory(@RequestBody Category category) {
         System.out.println(category.getCategoryName());
         System.out.println(category.getUserId());
         categoryService.addCategory(category);

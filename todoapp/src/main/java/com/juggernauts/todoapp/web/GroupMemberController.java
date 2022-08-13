@@ -1,8 +1,6 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.GroupMember;
-import com.juggernauts.todoapp.services.EmailVerificationService;
 import com.juggernauts.todoapp.services.GroupMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,7 +19,7 @@ public class GroupMemberController {
     GroupMemberService groupMemberService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewGroupMember(@RequestBody GroupMember groupMember) {
+    public ResponseEntity<GroupMember> createNewGroupMember(@RequestBody GroupMember groupMember) {
         groupMemberService.addGroupMember(groupMember);
         return ResponseEntity.ok(groupMember);
     };
