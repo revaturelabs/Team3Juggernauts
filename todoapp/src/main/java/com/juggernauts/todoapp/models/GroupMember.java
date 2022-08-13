@@ -15,17 +15,15 @@ public class GroupMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="group_member_id")
     private int groupMemberId;
 
-    @Column(columnDefinition = "boolean default false")
+    @Column(name = "is_admin",columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isAdmin;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
+    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
+    private int userId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private Group group;
-
+    @Column(name = "group_id", nullable = false, columnDefinition = "INTEGER")
+    private int groupId;
 }

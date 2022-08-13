@@ -12,18 +12,16 @@ import java.util.Date;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Reminder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int remindId;
+    @Column (name = "reminder_id")
+    private int reminderId;
 
-    @Column(name = "remind_by", columnDefinition = "DATE")
+    @Column(name = "task_id", nullable = false, columnDefinition = "INTEGER")
+    private int taskId;
+
+    @Column(name = "remind_by", nullable = false, columnDefinition = "DATE")
     private Date remindBy;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
-    private Task task;
-
 }

@@ -1,5 +1,7 @@
 package com.juggernauts.todoapp.models;
+
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,27 +18,25 @@ public class Task {
     @Column(name = "task_id")
     private int taskId;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(32)", name = "name")
+    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
+    private int userId;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(32)")
     private String name;
 
     @Column(name = "is_done", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isDone;
 
+    @Column(name = "group_id", columnDefinition = "INTEGER")
+    private int groupId;
+
+    @Column(name = "category_id", columnDefinition = "INTEGER")
+    private int categoryId;
+
     @Column(name = "complete_by", columnDefinition = "DATE")
     private Date completeBy;
 
-    @Column(length=256, nullable=false, unique=true)
+    @Column(columnDefinition = "TEXT")
     private String description;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    private Group group;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private int categoryId;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
 }
+

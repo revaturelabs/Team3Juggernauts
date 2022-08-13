@@ -11,19 +11,25 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id", columnDefinition = "INTEGER")
     private int categoryId;
+
+
+    @Column(name = "user_id", nullable = false, columnDefinition = "INTEGER")
+    private int userId;
 
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(32) CHECK (name != 'Complete')")
     private String categoryName;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
+    public int getUserId() {
+        return userId;
+    }
 
-
+    public String getCategoryName() {
+        return categoryName;
+    }
 }

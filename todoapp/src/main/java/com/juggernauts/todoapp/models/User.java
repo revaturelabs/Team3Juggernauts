@@ -12,22 +12,25 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true, name = "user_id")
+    @Column(name = "user_id")
     private int id;
 
-    @Column(length=256, nullable=false, name = "password")
+    @Column(nullable = false, columnDefinition = "VARCHAR(256)")
     private String password;
 
-    @Column(length=256, nullable=false, unique=true, name = "email")
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(256)")
     private String email;
 
-    @Column(columnDefinition = "boolean default false", name = "email_verified")
-    private boolean verifyEmail;
+    @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean emailVerified;
 
-
+    public User(int id, String password, String email) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+    }
 }

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: postgres
+    password: Password
+    url: jdbc:postgresql://project2.csx8e7m3j3wb.us-east-1.rds.amazonaws.com:5432/
+    driver-class-name: org.postgresql.Driver
+
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE2
