@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
@@ -18,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.services.MailService;
 import com.juggernauts.todoapp.services.UserService;
 import com.juggernauts.todoapp.web.LoginController;
 
@@ -30,6 +32,14 @@ public class LoginControllerTest {
 
     @MockBean
     private UserService userService;
+
+    @MockBean
+    private MailService mailService;
+
+    @Before
+    public void init() {
+        when(mailService.sendEmail(anyString(), anyString(), anyString())).thenReturn(null);
+    }
 
     @Test
     public void givenCorrectLoginInformation_whenLogin_thenReturnAccepted() throws Exception {

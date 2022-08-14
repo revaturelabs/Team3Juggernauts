@@ -29,6 +29,7 @@ public class WebSecurityConfig {
             // required things for access to endpoints
             .cors().and()
             .csrf().disable();
+            
         return http.build();
     }
 }

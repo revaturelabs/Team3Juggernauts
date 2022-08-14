@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.services.MailService;
 import com.juggernauts.todoapp.services.UserService;
 
 /**
@@ -21,6 +22,9 @@ import com.juggernauts.todoapp.services.UserService;
 public class LoginController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MailService mailService;
 
     /**
      * A POST mapping for the /login endpoint
@@ -34,17 +38,17 @@ public class LoginController {
     public ResponseEntity<String> login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         if (session.getAttribute("USER") != null)
-            return new ResponseEntity<>("You are already logged in.", HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You are already logged in.");
             
         // get user by the email
         User user = userService.findUserByEmail(email);
 
         // invalid password
         if (user == null || !user.getPassword().equals(password))
-            return new ResponseEntity<>("Invalid login details.", HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login details.");
 
         session.setAttribute("USER", user);
-        return new ResponseEntity<>("You have logged in.", HttpStatus.ACCEPTED);
+        return ResponseEntity.accepted().body("You have logged in.");
     }
 
     /**
@@ -60,14 +64,15 @@ public class LoginController {
         HttpSession session = request.getSession(true);
         // if the session has a user attributed to it already, then they must be logged in
         if (session.getAttribute("USER") != null)
-            return new ResponseEntity<>("You are already logged in.", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().body("You are already logged in.");
 
         // make sure theres no users with the input email
         if (userService.findUserByEmail(email) != null)
-            return new ResponseEntity<>("This email is taken.", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().body("This email is taken.");
 
         // registration is successful, add user to DB
         userService.addUser(new User(password, email, false));
-        return new ResponseEntity<>("Welcome.", HttpStatus.CREATED);
+        mailService.sendEmail(email, "Welcome to habitu.al!", "You have successfully registered to habitu.al.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Welcome.");
     }
 }
