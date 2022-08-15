@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupMemberService {
@@ -65,6 +66,17 @@ public class GroupMemberService {
         return null;
     }
     return listOfMembers;
-
 }
+
+public List<GroupMember> viewAllAdmins( GroupMember groupMembers){
+        List<GroupMember> allMembers = groupMemberRepo.findAll();
+       List<GroupMember> areAdmins = allMembers.stream().filter(GroupMember -> groupMembers.isAdmin())
+                .collect(Collectors.toList());
+
+        if(areAdmins.isEmpty()){
+        return null;
+        }
+        return areAdmins;
+}
+
 }

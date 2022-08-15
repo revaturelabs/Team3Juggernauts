@@ -6,6 +6,7 @@ import com.juggernauts.todoapp.repos.CategoryRepo;
 import com.juggernauts.todoapp.repos.EmailVerificationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmailVerificationService {
@@ -15,6 +16,7 @@ public class EmailVerificationService {
     public void setEmailVerificationRepo(EmailVerificationRepo emailVerificationRepo) {this.emailVerificationRepo = emailVerificationRepo;}
     private EmailVerificationRepo emailVerificationRepo;
 
+    @Transactional
     public String addEmailVerification(EmailVerification emailVerification) {
         emailVerificationRepo.save(emailVerification);
         return emailVerification.toString();

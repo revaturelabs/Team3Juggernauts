@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -55,6 +56,15 @@ public class CategoryService {
         }
         categoryRepo.findById(id);
         return 1;
+    }
+
+    public List<Category> viewAllCategories(int id) {
+        List<Category> allCategories = categoryRepo.findAll();
+
+        if(allCategories.isEmpty()){
+            return null;
+        }
+        return allCategories;
     }
 
 }
