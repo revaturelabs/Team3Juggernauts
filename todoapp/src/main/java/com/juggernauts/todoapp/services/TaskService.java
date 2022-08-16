@@ -20,6 +20,9 @@ public class TaskService {
         this.taskRepo = taskRepo;
     }
 
+    public TaskService() {
+    }
+
     @Autowired
     public void setTaskRepo(TaskRepo taskRepo) {this.taskRepo = taskRepo;}
 

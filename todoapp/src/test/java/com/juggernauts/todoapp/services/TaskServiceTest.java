@@ -12,17 +12,26 @@ import java.util.List;
 import com.juggernauts.todoapp.web.TaskController;
 import org.junit.Before;
 import org.junit.Test;
-class TaskServiceTest {
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-    private TaskService taskServiceMock;
+@RunWith(MockitoJUnitRunner.class) //I think?
+@SpringBootTest
+public class TaskServiceTest {
 
-    private TaskRepo taskRepoMock;
+    @Autowired
+    public TaskService taskServiceMock;
 
-    private Task taskMock;
+    @Mock //or maybe @MockBean im not sure how they really differ
+    public TaskRepo taskRepoMock;
 
-    private TaskController taskController;
+    public Task taskMock;
 
-    private Date completeBy = new Date();
+    public Date completeBy = new Date();
 
 
     @Before
@@ -37,38 +46,55 @@ class TaskServiceTest {
 
 
     @Test
-    void addTask() {
+   public void addTaskSuccessful() {
+        int expected = 1;
+        when(taskRepoMock.save(taskMock)).thenReturn(taskMock);
+        int actual = taskServiceMock.addTask(taskMock);
+        assertEquals(expected, actual);
+
     }
 
     @Test
-    void updateIsDone() {
+    public void addTaskFail() {
+        int creationFailed = -1;
+        when(taskServiceMock.addTask(taskMock)).thenReturn(1);
+       int actual = taskServiceMock.addTask(taskMock)
+
     }
 
     @Test
-    void deleteTask() {
+    public void updateIsDone() {
+        int expected = 1;
+        when(taskServiceMock.updateIsDone(taskMock)).thenReturn(1);
+        int actual = taskServiceMock.updateIsDone(taskMock);
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getTask() {
+    public void deleteTask() {
     }
 
     @Test
-    void getAllTasksByUserId() {
+    public void getTask() {
     }
 
     @Test
-    void getAllTasksUnCompleteByUserId() {
+    public void getAllTasksByUserId() {
     }
 
     @Test
-    void getAllTasksCompleteByUserId() {
+    public void getAllTasksUnCompleteByUserId() {
     }
 
     @Test
-    void getAllTasksByGroup() {
+    public void getAllTasksCompleteByUserId() {
     }
 
     @Test
-    void getAllTasksByCategory() {
+    public void getAllTasksByGroup() {
+    }
+
+    @Test
+    public void getAllTasksByCategory() {
     }
 }
