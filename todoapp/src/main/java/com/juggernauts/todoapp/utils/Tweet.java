@@ -18,10 +18,10 @@ public class Tweet {
         System.out.println();
         System.out.println("*************** TWEET in Progress *********************");
 
-        String API_KEY = "Dp95YCqtDblOcVn5SeJnNfXxA";
-        String API_KEY_SECRET ="4R4WllVJCiENgNOg7Bcv7uhhGyMjEN6PnTSEwUhaZxqDKmbzbb";
-        String ACCESS_TOKEN = "1559535790501335041-YWGK7A1XZpflnQMBGHlH2Nyk8gLgIn";
-        String ACCESS_TOKEN_SECRET = "5X7aZkzWitKc06NaUdUN64xlalnPQxxHWT81gjfsdfq3G";
+        String API_KEY = "foo";
+        String API_KEY_SECRET ="foo";
+        String ACCESS_TOKEN = "foo-bar";
+        String ACCESS_TOKEN_SECRET = "foo";
         String tweet = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
 
         try {
