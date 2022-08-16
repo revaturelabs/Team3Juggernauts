@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS reminders (
     reminder_id INTEGER GENERATED ALWAYS AS IDENTITY,
     task_id INTEGER NOT NULL,
     remind_by DATE NOT NULL,
+    repeat_every INTEGER, -- seconds
     FOREIGN KEY (task_id) REFERENCES tasks (task_id),
     PRIMARY KEY (reminder_id)
 );

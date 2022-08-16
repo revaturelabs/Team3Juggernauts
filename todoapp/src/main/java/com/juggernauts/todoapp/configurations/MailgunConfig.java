@@ -15,7 +15,7 @@ import feign.auth.BasicAuthRequestInterceptor;
  * A configuration for the Mailgun FeignClient
  */
 @Configuration
-public class MailgunConfiguration {
+public class MailgunConfig {
     /**
      * Sets the contract the client uses to a SpringMvcContract
      * This is so we can use Spring MVC RequestMappings for requests
