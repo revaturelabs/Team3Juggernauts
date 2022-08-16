@@ -1,5 +1,6 @@
 spring:
   datasource:
+<<<<<<< HEAD
     username: jrcode
     password: firstDatabasePassw0rd
     url: jdbc:postgresql://first-database.ca2hagivlgin.us-east-2.rds.amazonaws.com:5432/todo
@@ -14,3 +15,9 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE2
+=======
+    username: postgres
+    password: vedzic-mekDi1-wepwuc
+    url: jdbc:postgresql://localhost:5432/todo
+    driver-class-name: org.postgresql.Driver
+>>>>>>> abf1dbf2a9c227a2d89849f75bcb7c0e24a55563

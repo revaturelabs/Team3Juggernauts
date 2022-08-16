@@ -1,6 +1,9 @@
 package com.juggernauts.todoapp.services;
 
+<<<<<<< HEAD
 import com.juggernauts.todoapp.models.Reminder;
+=======
+>>>>>>> abf1dbf2a9c227a2d89849f75bcb7c0e24a55563
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.ReminderRepo;

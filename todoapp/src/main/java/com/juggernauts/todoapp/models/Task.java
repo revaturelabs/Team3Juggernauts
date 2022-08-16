@@ -17,6 +17,12 @@ public class Task {
 
     // NON RELATIONAL FIELDS
 
+<<<<<<< HEAD
+=======
+
+    // NON RELATIONAL FIELDS
+
+>>>>>>> abf1dbf2a9c227a2d89849f75bcb7c0e24a55563
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
@@ -87,5 +93,9 @@ public class Task {
         this.name = name;
         this.user = user;
     }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> abf1dbf2a9c227a2d89849f75bcb7c0e24a55563

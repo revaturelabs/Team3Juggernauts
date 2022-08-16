@@ -20,7 +20,11 @@ public class ReminderController {
     ReminderService reminderService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+<<<<<<< HEAD
     public ResponseEntity createNewReminder(@RequestBody Reminder reminder) {
+=======
+    public ResponseEntity<Reminder> createNewReminder(@RequestBody Reminder reminder) {
+>>>>>>> abf1dbf2a9c227a2d89849f75bcb7c0e24a55563
         reminderService.addReminder(reminder);
         return ResponseEntity.ok(reminder);
     };
