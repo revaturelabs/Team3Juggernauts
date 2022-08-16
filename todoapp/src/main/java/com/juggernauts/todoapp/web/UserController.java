@@ -29,12 +29,5 @@ public class UserController {
         return ResponseEntity.ok(user);
     };
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity viewAllTasks(@RequestBody User user) {
-        List<Task> usersTasks;
-        usersTasks = taskService.getTasks(user);
-        usersTasks.stream().forEach(System.out::println);
-        return ResponseEntity.ok(usersTasks);
-    }
+
 }

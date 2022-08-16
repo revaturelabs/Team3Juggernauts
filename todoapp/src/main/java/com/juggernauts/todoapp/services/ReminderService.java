@@ -1,8 +1,8 @@
 package com.juggernauts.todoapp.services;
 
-import com.juggernauts.todoapp.models.Group;
+//import com.juggernauts.todoapp.models.Group;
 import com.juggernauts.todoapp.models.Reminder;
-import com.juggernauts.todoapp.repos.GroupRepo;
+//import com.juggernauts.todoapp.repos.GroupRepo;
 import com.juggernauts.todoapp.repos.ReminderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

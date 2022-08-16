@@ -1,6 +1,6 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.Group;
+//import com.juggernauts.todoapp.models.Group;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.services.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;

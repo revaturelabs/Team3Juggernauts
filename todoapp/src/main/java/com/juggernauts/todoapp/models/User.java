@@ -2,6 +2,8 @@ package com.juggernauts.todoapp.models;
 
 import lombok.*;
 import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -37,8 +39,9 @@ public class User {
         this.email = email;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Category.class)
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class)
     @JoinColumn(name="category_id")
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<Category> categories;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -49,11 +52,16 @@ public class User {
 //    private Group group;
 //    private GroupMember groupMember;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "group_members",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private Set<Group> groups;
+//    @OneToMany(cascade = CascadeType.MERGE,  mappedBy = "user")
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    private List<GroupMember> groupMember;
+//
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "group_members",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
+//    private Set<Group> groups;
+
 
 
 

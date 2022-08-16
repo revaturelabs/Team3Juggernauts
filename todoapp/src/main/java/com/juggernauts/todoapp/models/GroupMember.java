@@ -30,15 +30,20 @@
 ////    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
 ////    private int userId;
 ////
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
-//    private User user;
+////    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+////    @JoinColumn(name = "user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
+////    private User user;
 //
 //    // used in previous version
 ////    @Column(name = "group_id", nullable = false, columnDefinition = "INTEGER")
 ////    private int groupId;
 //
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-//    private Group group;
+////    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+////    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+////    private Group group;
+////
+////    public GroupMember(boolean isAdmin, User user) {
+////        this.isAdmin = isAdmin;
+////        this.user = user;
+////    }
 //}
