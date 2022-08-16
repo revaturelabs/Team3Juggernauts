@@ -1,8 +1,7 @@
-package com.juggernauts.todoapp.configurations;
+package com.juggernauts.todoapp.components;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -21,7 +20,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.juggernauts.todoapp.components.ReminderScheduler;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
@@ -30,7 +28,7 @@ import com.juggernauts.todoapp.services.ReminderService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReminderSchedulerConfigTest {
+public class ReminderSchedulerTest {
     @Mock private Reminder mockReminder;
     @Mock private Task mockTask;
 
@@ -51,7 +49,6 @@ public class ReminderSchedulerConfigTest {
         outdatedReminders = new ArrayList<>();
         outdatedReminders.add(mockReminder);
 
-        when(mailService.sendEmail(anyString(), anyString(), anyString())).thenReturn(null);
         when(reminderService.getAllOutdatedReminders()).thenReturn(outdatedReminders);
         doAnswer(new Answer<Void>() {
             @Override
