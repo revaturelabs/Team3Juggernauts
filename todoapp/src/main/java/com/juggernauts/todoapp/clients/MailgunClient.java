@@ -4,6 +4,7 @@ import com.juggernauts.todoapp.models.MailgunResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 /**
  * The client and configurations for the Mailgun API service
  * @author Jacob
