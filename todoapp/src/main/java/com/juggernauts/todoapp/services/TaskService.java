@@ -24,8 +24,9 @@ public class TaskService {
 
     public List<Task> getTasks(User user) {
         List<Task> allTasks = taskRepo.findAll();
+        System.out.println("ALL TASKS: "+allTasks);
         List<Task> usersTasks = allTasks.stream()
-                .filter(task -> task.getUser() == user)
+                .filter(task -> task.getUser().getId() == user.getId())
                 .collect(Collectors.toList());
         return usersTasks;
     }
