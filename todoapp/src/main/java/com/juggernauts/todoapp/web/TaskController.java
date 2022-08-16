@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.repos.TaskRepo;
 import com.juggernauts.todoapp.services.ReminderService;
 import com.juggernauts.todoapp.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,16 @@ import java.util.List;
 @RequestMapping("task")
 public class TaskController {
 
-
     TaskService taskService;
     @Autowired
-    public void setTaskService(TaskService taskService) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
+//    @Autowired
+//    public void setTaskService(TaskService taskService) {
+//        this.taskService = taskService;
+//    }
+
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createNewTask(@RequestBody Task task) {
@@ -59,7 +64,9 @@ public class TaskController {
 
         List<Task> usersTasks;
         usersTasks = taskService.getTasks(currentUser);
-//        usersTasks.stream().forEach(System.out::println);
+        for (Task task: usersTasks) {
+            System.out.println(task);
+        }
         System.out.println("NO ERROR YET!!!!!!");
         ObjectMapper om = new ObjectMapper();
         return ResponseEntity.ok(om.writeValueAsString(usersTasks));

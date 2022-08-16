@@ -10,7 +10,6 @@ import java.util.List;
 @Table(name = "tasks")
 @Getter
 @Setter
-
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -91,16 +90,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "taskId=" + taskId +
-                ", name='" + name + '\'' +
-                ", isDone=" + isDone +
-                ", completeBy=" + completeBy +
-                ", description='" + description + '\'' +
-                ", user=" + user +
-                ", category=" + category.getCategoryName() +
-                ", reminders=" + reminders +
-                '}';
+        return "{NAME: "+ this.name +
+                ", UserID: " + getUser().getId()+"}";
     }
 }
 
