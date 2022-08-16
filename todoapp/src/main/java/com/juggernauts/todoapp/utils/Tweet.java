@@ -6,7 +6,7 @@ import twitter4j.auth.AccessToken;
 
 /**
  * git branch: Twitter_API
- * 
+ *
  * Twitter4J/ wrapper for Twitter API V2
  * Tweet object POSTs tweet to share ToDoApp
  * for Team Juggernaut, by way of Habit.ual
