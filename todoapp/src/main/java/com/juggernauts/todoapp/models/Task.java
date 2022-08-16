@@ -1,114 +1,41 @@
 package com.juggernauts.todoapp.models;
 
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "tasks")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private int taskId;
+
+    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
     private int userId;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(32)")
     private String name;
+
+    @Column(name = "is_done", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isDone;
+
+    @Column(name = "group_id", columnDefinition = "INTEGER")
     private int groupId;
+
+    @Column(name = "category_id", columnDefinition = "INTEGER")
     private int categoryId;
+
+    @Column(name = "complete_by", columnDefinition = "DATE")
     private Date completeBy;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
-
-    public Task() {
-    }
-
-    public Task(int taskId, int userId, String name,
-                boolean isDone, int groupId, int categoryId, Date completeBy, String description) {
-        this.taskId = taskId;
-        this.userId = userId;
-        this.name = name;
-        this.isDone = isDone;
-        this.groupId = groupId;
-        this.categoryId = categoryId;
-        this.completeBy = completeBy;
-        this.description = description;
-    }
-
-    public int getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Date getCompleteBy() {
-        return completeBy;
-    }
-
-    public void setCompleteBy(Date completeBy) {
-        this.completeBy = completeBy;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "taskId=" + taskId +
-                ", userId=" + userId +
-                ", name='" + name + '\'' +
-                ", isDone=" + isDone +
-                ", groupId=" + groupId +
-                ", categoryId=" + categoryId +
-                ", completeBy=" + completeBy +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
-
