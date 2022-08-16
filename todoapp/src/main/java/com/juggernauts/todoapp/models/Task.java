@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -79,19 +78,6 @@ public class Task {
         this.description = description;
         this.user = user;
     }
-
-    public Task(String name, Date completeBy, String description, User user) {
-        this.name = name;
-        this.completeBy = completeBy;
-        this.description = description;
-        this.user = user;
-    }
-
-    public Task(String name, User user) {
-        this.name = name;
-        this.user = user;
-    }
-}
 
     public Task(String name, Date completeBy, String description, User user) {
         this.name = name;

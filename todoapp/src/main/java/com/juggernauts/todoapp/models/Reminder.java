@@ -24,6 +24,9 @@ public class Reminder {
     @Column(name = "remind_by", nullable = false, columnDefinition = "DATE")
     private Date remindBy;
 
+    @Column(name = "repeat_every", nullable = true, columnDefinition = "INTEGER")
+    private Integer repeatEvery;
+
     // RELATIONAL FIELDS
 
     // used in previous version

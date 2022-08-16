@@ -1,19 +1,17 @@
 package com.juggernauts.todoapp.web;
 
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.services.TaskService;
 import com.juggernauts.todoapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
 @RestController
 @RequestMapping("user")
 public class UserController {
-    User testuser = new User(1, "testpassword", "testemail");
+    User testuser = new User("password", "email@test.com", true);
 
     @Autowired
     UserService userService;
@@ -25,7 +23,5 @@ public class UserController {
     public ResponseEntity<User> createNewUser(@RequestBody User user) {
         userService.addUser(user);
         return ResponseEntity.ok(user);
-    };
-
-
+    }
 }
