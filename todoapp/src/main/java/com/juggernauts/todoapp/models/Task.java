@@ -10,9 +10,10 @@ import java.util.List;
 @Table(name = "tasks")
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Task {
 
     // NON RELATIONAL FIELDS
@@ -57,7 +58,7 @@ public class Task {
 //    @Column(name = "category_id", columnDefinition = "INTEGER")
 //    private int categoryId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name="category_id", referencedColumnName = "category_id", columnDefinition = "INTEGER")
     private Category category;
 
@@ -86,6 +87,20 @@ public class Task {
     public Task(String name, User user) {
         this.name = name;
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", name='" + name + '\'' +
+                ", isDone=" + isDone +
+                ", completeBy=" + completeBy +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                ", category=" + category.getCategoryName() +
+                ", reminders=" + reminders +
+                '}';
     }
 }
 

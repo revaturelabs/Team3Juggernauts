@@ -1,5 +1,7 @@
 package com.juggernauts.todoapp.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
@@ -10,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -17,8 +20,12 @@ import java.util.List;
 @RequestMapping("task")
 public class TaskController {
 
-    @Autowired
+
     TaskService taskService;
+    @Autowired
+    public void setTaskService(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createNewTask(@RequestBody Task task) {
@@ -45,14 +52,27 @@ public class TaskController {
     };
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity viewAllTasks() {
+    public ResponseEntity viewAllTasks() throws JsonProcessingException {
         // Testing
         User currentUser = new User(1, "testpass1", "test1");
 
 
         List<Task> usersTasks;
         usersTasks = taskService.getTasks(currentUser);
-        usersTasks.stream().forEach(System.out::println);
-        return ResponseEntity.ok(usersTasks);
+//        usersTasks.stream().forEach(System.out::println);
+        System.out.println("NO ERROR YET!!!!!!");
+        ObjectMapper om = new ObjectMapper();
+        return ResponseEntity.ok(om.writeValueAsString(usersTasks));
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping("task/category")
+    public ResponseEntity viewAllTasksByCategory() {
+        // Testing
+        User currentUser = new User(1, "testpass1", "test1");
+
+        HashMap<String, List<Task>> tasksPerCategory = taskService.getAllTasksPerCategory(currentUser);
+        return ResponseEntity.ok(tasksPerCategory);
+    }
+
 }

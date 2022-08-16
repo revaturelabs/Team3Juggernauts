@@ -1,5 +1,6 @@
 package com.juggernauts.todoapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.List;
 @Table(name = "categories")
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
@@ -28,12 +29,24 @@ public class Category {
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
+    @JsonIgnore
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "category")
+    @JsonIgnore
     private List<Task> tasks;
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", user=" + user +
+                ", tasks=" + tasks +
+                '}';
     }
 }
