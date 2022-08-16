@@ -15,14 +15,14 @@ import twitter4j.auth.AccessToken;
 public class Tweet {
 
     public void shareApp(){
+        System.out.println();
+        System.out.println("*************** TWEET in Progress *********************");
 
-        System.out.println("Twitter test in progress");
-
-        String API_KEY = "x";
-        String API_KEY_SECRET ="x";
-        String ACCESS_TOKEN = "x";
-        String ACCESS_TOKEN_SECRET = "x";
-        String tweet = "I stay on task with the ToDoApp from Habit.ual. Download their app today!!";
+        String API_KEY = "Dp95YCqtDblOcVn5SeJnNfXxA";
+        String API_KEY_SECRET ="4R4WllVJCiENgNOg7Bcv7uhhGyMjEN6PnTSEwUhaZxqDKmbzbb";
+        String ACCESS_TOKEN = "1559535790501335041-YWGK7A1XZpflnQMBGHlH2Nyk8gLgIn";
+        String ACCESS_TOKEN_SECRET = "5X7aZkzWitKc06NaUdUN64xlalnPQxxHWT81gjfsdfq3G";
+        String tweet = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
 
         try {
             twitter4j.Twitter twitter = new TwitterFactory().getInstance();
@@ -34,7 +34,7 @@ public class Tweet {
             twitter.setOAuthAccessToken(accessToken);
 
             twitter.updateStatus(tweet);
-
+            System.out.println();
             System.out.println("Successfully updated the status in Twitter.");
         } catch (TwitterException te) {
             te.printStackTrace();
