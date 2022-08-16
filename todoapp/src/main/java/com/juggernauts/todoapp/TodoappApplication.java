@@ -11,7 +11,8 @@ public class TodoappApplication {
         SpringApplication.run(TodoappApplication.class, args);
 
         Tweet tweet = new Tweet();
-        tweet.shareApp();
+        String tw = "Twitter test";
+        tweet.shareApp(tw);
 
     }
 }

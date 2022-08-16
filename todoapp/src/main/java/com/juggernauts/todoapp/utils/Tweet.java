@@ -14,7 +14,13 @@ import twitter4j.auth.AccessToken;
 
 public class Tweet {
 
-    public void shareApp(){
+    public Tweet(){}
+
+    String tw = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
+
+
+    public String shareApp(String tw){
+
         System.out.println();
         System.out.println("*************** TWEET in Progress *********************");
 
@@ -22,7 +28,6 @@ public class Tweet {
         String API_KEY_SECRET ="foo";
         String ACCESS_TOKEN = "foo-bar";
         String ACCESS_TOKEN_SECRET = "foo";
-        String tweet = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
 
         try {
             twitter4j.Twitter twitter = new TwitterFactory().getInstance();
@@ -33,11 +38,12 @@ public class Tweet {
 
             twitter.setOAuthAccessToken(accessToken);
 
-            twitter.updateStatus(tweet);
+            twitter.updateStatus(tw);
             System.out.println();
             System.out.println("Successfully updated the status in Twitter.");
         } catch (TwitterException te) {
             te.printStackTrace();
         }
+        return "Successfully updated the status in Twitter.";
     }
     }
