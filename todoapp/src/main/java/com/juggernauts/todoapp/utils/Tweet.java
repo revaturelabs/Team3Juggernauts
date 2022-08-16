@@ -33,7 +33,7 @@ public class Tweet {
 
             twitter.setOAuthAccessToken(accessToken);
 
-            twitter.updateStatus("Successfully tweeted from Java Twitter4J API!!!");
+            twitter.updateStatus(tweet);
 
             System.out.println("Successfully updated the status in Twitter.");
         } catch (TwitterException te) {
