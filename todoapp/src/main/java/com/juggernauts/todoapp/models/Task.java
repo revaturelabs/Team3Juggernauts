@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -14,6 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task {
+
+    // NON RELATIONAL FIELDS
+
 
     // NON RELATIONAL FIELDS
 
@@ -40,7 +44,7 @@ public class Task {
 //    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
 //    private int userId;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
     private User user;
 
@@ -48,9 +52,9 @@ public class Task {
 //    @Column(name = "group_id", columnDefinition = "INTEGER")
 //    private int groupId;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name="group_id", referencedColumnName = "group_id", columnDefinition = "INTEGER")
-//    private Group group;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="group_id", referencedColumnName = "group_id", columnDefinition = "INTEGER")
+    private Group group;
 
 
     // used in a previous version
@@ -64,17 +68,11 @@ public class Task {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task")
     private List<Reminder> reminders;
 
-    public Task(String name, Date completeBy, User user) {
-        this.name = name;
-        this.completeBy = completeBy;
-        this.user = user;
-    }
 
-    public Task(String name, String description, User user) {
-        this.name = name;
-        this.description = description;
-        this.user = user;
-    }
+
+
+
+}
 
     public Task(String name, Date completeBy, String description, User user) {
         this.name = name;

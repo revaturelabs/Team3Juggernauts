@@ -5,6 +5,8 @@ import lombok.*;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -13,7 +15,9 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+public class User {
+
+    // NON-RELATIONAL FIELDS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -33,4 +37,25 @@ public class User implements Serializable {
         this.email = email;
         this.emailVerified = emailVerified;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Category.class)
+    @JoinColumn(name="category_id")
+    List<Category> categories;
+
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private EmailVerification emailVerification;
+//
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(referencedColumnName = "group_id")
+//    private Group group;
+//    private GroupMember groupMember;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "group_members",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<Group> groups;
+
+
+
 }
