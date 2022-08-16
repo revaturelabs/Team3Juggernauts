@@ -18,14 +18,26 @@ public class ReminderService {
         this.reminderRepo = reminderRepo;
     }
 
-    @Transactional
-    public int addReminder(Reminder reminder) {
-        if (reminder.getReminderId() > 0){
-            reminderRepo.save(reminder);
-            return 1;
-     }
-     return-1;
+    public String addReminder(Reminder reminder) {
+        reminderRepo.save(reminder);
+        return reminder.toString();
     }
+
+    public List<Reminder> getAllOutdatedReminders() {
+        return reminderRepo.getOutdatedReminders();
+    }
+
+    public void deleteReminders(List<Reminder> reminders) {
+        reminderRepo.deleteAll(reminders);
+    }
+//    @Transactional
+//  public int addReminder(Reminder reminder) {
+//      if (reminder.getReminderId() > 0){
+//           reminderRepo.save(reminder);
+//            return 1;
+//     }
+//     return-1;
+//    }
 
     @Transactional
     public int updateReminderDate(int id, Date date) {

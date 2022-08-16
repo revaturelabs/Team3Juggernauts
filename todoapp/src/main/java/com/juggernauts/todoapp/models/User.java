@@ -56,5 +56,9 @@ public class User {
     private Set<Group> groups;
 
 
-
+    public User(String password, String email, boolean emailVerified) {
+        this.password = password;
+        this.email = email;
+        this.emailVerified = emailVerified;
+    }
 }

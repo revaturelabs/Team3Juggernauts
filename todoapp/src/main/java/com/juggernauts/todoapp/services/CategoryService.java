@@ -1,18 +1,23 @@
 package com.juggernauts.todoapp.services;
 
 import com.juggernauts.todoapp.models.Category;
+import com.juggernauts.todoapp.models.Task;
+import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
 public class CategoryService {
     private CategoryRepo categoryRepo;
+    private TaskService taskService;
 
     @Autowired
     public void setCategoryRepo(CategoryRepo categoryRepo) {
@@ -66,6 +71,8 @@ public class CategoryService {
         }
         return allCategories;
     }
+
+
 
 }
 

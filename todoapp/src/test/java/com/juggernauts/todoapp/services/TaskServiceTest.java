@@ -1,13 +1,15 @@
 package com.juggernauts.todoapp.services;
 
 import com.juggernauts.todoapp.models.Task;
+import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.TaskRepo;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.juggernauts.todoapp.web.TaskController;
 import org.junit.Before;
@@ -31,6 +33,8 @@ public class TaskServiceTest {
 
     public Task taskMock;
 
+    public User user;
+
     public Date completeBy = new Date();
 
 
@@ -39,8 +43,7 @@ public class TaskServiceTest {
         taskRepoMock = mock(TaskRepo.class);
         taskServiceMock = new TaskService(taskRepoMock);
 
-        taskMock = new Task(1,1,"TaskName", false,
-                1, 1, completeBy, "description" );
+        taskMock = new Task("taskOne", "descriptionOne", user );
  }
 
 
@@ -56,26 +59,35 @@ public class TaskServiceTest {
 
     @Test
     public void addTaskFail() {
+        Task nullTask = null;
         int creationFailed = -1;
-        when(taskServiceMock.addTask(taskMock)).thenReturn(1);
-       int actual = taskServiceMock.addTask(taskMock)
+        when(taskRepoMock.save(taskMock)).thenReturn(taskMock);
+        int actual = taskServiceMock.addTask(nullTask);
+       assertEquals(creationFailed, actual);
 
+    }
+    @Test
+    public void deleteTask() {
+        int expected =1;
+        int actual = taskServiceMock.deleteTask(taskMock.getTaskId());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void updateIsDone() {
         int expected = 1;
-        when(taskServiceMock.updateIsDone(taskMock)).thenReturn(1);
+       when(taskServiceMock.updateIsDone(taskMock)).thenReturn(1);
         int actual = taskServiceMock.updateIsDone(taskMock);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void deleteTask() {
-    }
-
-    @Test
-    public void getTask() {
+    public void successfulGetTask() {
+        int expected = 1;
+        when(taskRepoMock.findById(taskMock.getTaskId())).thenReturn(Optional.ofNullable(taskMock));
+        when(taskServiceMock.getTask(taskMock.getTaskId())).thenReturn(1);
+        int actual = taskServiceMock.getTask(1);
+        assertEquals(expected,actual);
     }
 
     @Test

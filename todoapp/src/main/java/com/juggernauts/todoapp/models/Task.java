@@ -14,6 +14,29 @@ import java.util.List;
 @AllArgsConstructor
 public class Task {
 
+    public Task(String name, Date completeBy, User user) {
+        this.name = name;
+        this.completeBy = completeBy;
+        this.user = user;
+    }
+
+    public Task(String name, String description, User user) {
+        this.name = name;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Task(String name, Date completeBy, String description, User user) {
+        this.name = name;
+        this.completeBy = completeBy;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Task(String name, User user) {
+        this.name = name;
+        this.user = user;
+    }
     // NON RELATIONAL FIELDS
 
     @Id
