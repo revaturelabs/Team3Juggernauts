@@ -21,6 +21,11 @@ public class EmailVerification {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String token;
 
-    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
-    private int userId;
+    // used in a previous version
+//    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
+//    private int userId;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="user_id", referencedColumnName = "user_id")
+    private User user;
 }

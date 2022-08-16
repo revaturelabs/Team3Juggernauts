@@ -4,6 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "categories")
 @Getter
@@ -18,18 +23,21 @@ public class Category {
     @Column(name = "category_id", columnDefinition = "INTEGER")
     private int categoryId;
 
-
-    @Column(name = "user_id", nullable = false, columnDefinition = "INTEGER")
-    private int userId;
-
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(32) CHECK (name != 'Complete')")
     private String categoryName;
 
-    public int getUserId() {
-        return userId;
-    }
+    // This is from a previous "version"
+//    @Column(name = "user_id", nullable = false, columnDefinition = "INTEGER")
+//    private int userId;
 
-    public String getCategoryName() {
-        return categoryName;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
+    private List<Task> tasks;
+
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

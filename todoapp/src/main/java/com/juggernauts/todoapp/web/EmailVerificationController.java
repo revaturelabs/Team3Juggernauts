@@ -1,8 +1,6 @@
 package com.juggernauts.todoapp.web;
 
-import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.EmailVerification;
-import com.juggernauts.todoapp.services.CategoryService;
 import com.juggernauts.todoapp.services.EmailVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

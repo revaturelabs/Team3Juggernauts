@@ -1,20 +1,23 @@
 package com.juggernauts.todoapp.services;
 
-import com.juggernauts.todoapp.models.Reminder;
+import com.juggernauts.todoapp.models.Category;
+import com.juggernauts.todoapp.models.Group;
 import com.juggernauts.todoapp.models.Task;
-import com.juggernauts.todoapp.repos.ReminderRepo;
+import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
     private TaskRepo taskRepo;
+    private User user;
+    private Group group;
+    private Category category;
 
     public TaskService(TaskRepo taskRepo) {
         this.taskRepo = taskRepo;
@@ -64,7 +67,7 @@ public class TaskService {
     }
 
     public List<Task> getAllTasksByUserId(List<Integer> ids) {
-        List<Task> tasksById = (List<Task>) taskRepo.findAllById(ids);
+        List<Task> tasksById = taskRepo.findAllById(ids);
         if (!tasksById.isEmpty()) {
             return tasksById;
         }
@@ -73,7 +76,7 @@ public class TaskService {
 
     public List<Task> getAllTasksUnCompleteByUserId(Task task, int id) {
         List<Task> allTasks = taskRepo.findAll();
-       List<Task> incompleteTasksByUser = allTasks.stream().filter(Task -> !task.isDone() && task.getUserId() == id)
+       List<Task> incompleteTasksByUser = allTasks.stream().filter(Task -> !task.isDone() && user.getId() == id)
                 .collect(Collectors.toList());
         if(!incompleteTasksByUser.isEmpty()){
             return incompleteTasksByUser;
@@ -83,7 +86,7 @@ public class TaskService {
 
     public List<Task> getAllTasksCompleteByUserId(Task task, int id) {
         List<Task> allTasks = taskRepo.findAll();
-        List<Task> completeTasksByUser = allTasks.stream().filter(Task -> task.isDone() && task.getUserId() == id)
+        List<Task> completeTasksByUser = allTasks.stream().filter(Task -> task.isDone() && user.getId() == id)
                 .collect(Collectors.toList());
         if(!completeTasksByUser.isEmpty()){
             return completeTasksByUser;
@@ -93,7 +96,7 @@ public class TaskService {
 
     public List<Task> getAllTasksByGroup (Task task, int id) {
         List<Task> allTasks = taskRepo.findAll();
-    List<Task> groupTasks = allTasks.stream().filter(Task -> task.getGroupId() == id)
+    List<Task> groupTasks = allTasks.stream().filter(Task -> group.getGroupId() == id)
             .collect(Collectors.toList());
     if(!groupTasks.isEmpty()){
         return groupTasks;
@@ -103,7 +106,7 @@ public class TaskService {
 
     public List<Task> getAllTasksByCategory (Task task, int id) {
         List<Task> allTasks = taskRepo.findAll();
-        List<Task> categoryTasks = allTasks.stream().filter(Task -> task.getGroupId() == id)
+        List<Task> categoryTasks = allTasks.stream().filter(Task -> category.getCategoryId() == id)
                 .collect(Collectors.toList());
         if(!categoryTasks.isEmpty()){
             return categoryTasks;
