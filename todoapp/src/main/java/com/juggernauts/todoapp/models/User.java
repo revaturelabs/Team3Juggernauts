@@ -33,10 +33,30 @@ public class User {
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean emailVerified;
 
+    public User(int id, String password, String email, boolean emailVerified) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.emailVerified = emailVerified;
+    }
+
     public User(int id, String password, String email) {
         this.id = id;
         this.password = password;
         this.email = email;
+        this.emailVerified = false;
+    }
+
+    public User(String password, String email, boolean emailVerified) {
+        this.password = password;
+        this.email = email;
+        this.emailVerified = emailVerified;
+    }
+
+    public User(String password, String email) {
+        this.password = password;
+        this.email = email;
+        this.emailVerified = false;
     }
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class)
