@@ -1,15 +1,14 @@
 package com.juggernauts.todoapp.services;
 
+import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,5 +91,18 @@ public class TaskService {
         );
 
         return tasksToCategory;
+    }
+
+    public void resolveTask(int taskId) throws NoSuchElementException {
+        Task task = taskRepo.findById(taskId).orElseThrow(NoSuchElementException::new);
+
+        task.setDone(true);
+
+        taskRepo.save(task);
+    }
+
+    public void changeCategory(int taskId, String categoryName) throws NoSuchElementException {
+        Task task = taskRepo.findById(taskId).orElseThrow(NoSuchElementException::new);
+        task.setCategory(new Category());
     }
 }

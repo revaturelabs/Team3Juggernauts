@@ -43,16 +43,15 @@ public class CategoryController {
 
         categoryService.addCategory(category);
         return ResponseEntity.ok(category);
-    };
+    }
 
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity getAllCategories() {
-//        System.out.println("!*!*!*!*!*!*!*!*!*&!*!*!*ENTERED CATEGORY CONTROLLER!*!*!*!**!*!*!*!*!*!*");
-//        // This will be DELETED once currentUser is available from userSession
-//        User currentUser = new User(1, "testpass1", "test1");
-//        System.out.println("CURRENT USER: "+currentUser);
-//
-//
-//        return ResponseEntity.ok(categoryService.getAllTasksPerCategory(currentUser));
-//    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllCategories() {
+        // Testing
+        User currentUser = new User(1, "testpass1", "test1");
+
+        List<Category> categories = categoryService.getAllCategoriesForUser(currentUser);
+        return ResponseEntity.ok(categories);
+    }
+
 }

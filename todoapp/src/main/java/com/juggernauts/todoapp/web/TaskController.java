@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -73,7 +74,7 @@ public class TaskController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping("task/category")
+    @RequestMapping("/viewcategory")
     public ResponseEntity viewAllTasksByCategory() {
         // Testing
         User currentUser = new User(1, "testpass1", "test1");
@@ -81,5 +82,43 @@ public class TaskController {
         HashMap<String, List<Task>> tasksPerCategory = taskService.getAllTasksPerCategory(currentUser);
         return ResponseEntity.ok(tasksPerCategory);
     }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping("/resolve")
+    public ResponseEntity completeTask(@RequestBody Task task) {
+        System.out.println(task.getTaskId());
+        int taskId = 0;
+        try {
+            taskId = task.getTaskId();
+            System.out.println("TaskID: ");
+            taskService.resolveTask(taskId);
+            return ResponseEntity.ok(taskId);
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest().body(task.getTaskId());
+        }
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping("/category")
+    public ResponseEntity changeCategory(@RequestBody Task task) {
+        System.out.println(task.getTaskId());
+        int taskId = 0;
+        String categoryName = "";
+        try {
+            taskId = task.getTaskId();
+            categoryName = task.getCategory().getCategoryName();
+
+            System.out.println("TaskID: ");
+            taskService.changeCategory(taskId, categoryName);
+            return ResponseEntity.ok(task);
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest().body(task.getTaskId());
+        }
+    }
+
+
+
 
 }

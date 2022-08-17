@@ -64,6 +64,15 @@ public class Task {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task")
     private List<Reminder> reminders;
 
+    public Task(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public Task(int taskId, String name) {
+        this.taskId = taskId;
+        this.name = name;
+    }
+
     public Task(String name, Date completeBy, User user) {
         this.name = name;
         this.completeBy = completeBy;
@@ -86,6 +95,11 @@ public class Task {
     public Task(String name, User user) {
         this.name = name;
         this.user = user;
+    }
+
+    public Task(int taskId, Category category) {
+        this.taskId = taskId;
+        this.category = category;
     }
 
     @Override
