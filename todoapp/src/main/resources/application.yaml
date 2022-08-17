@@ -1,6 +1,4 @@
 spring:
   datasource:
-    username: postgres
-    password: vedzic-mekDi1-wepwuc
-    url: jdbc:postgresql://localhost:5432/todo
+    url: jdbc:postgresql://todo.cnwcxrrmq60v.us-east-1.rds.amazonaws.com:5432/todo?user=postgres&password=xiddy5-fikpor-keZjuv
     driver-class-name: org.postgresql.Driver

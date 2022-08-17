@@ -13,14 +13,14 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * @author Jacob
  */
 public class MustBeLoggedInInterceptor implements HandlerInterceptor {
-    private static final String[] UNAUTHENTICATED_ENDPOINTS = {"/login", "/logout", "/register", "/error"};
+    private static final String[] UNAUTHENTICATED_ENDPOINTS = {"/login", "/logout", "/register", "/error", "/verify"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // if the request URI matches any unauthenticated endpoint, then continue with the handling
-        if (Arrays.stream(UNAUTHENTICATED_ENDPOINTS).anyMatch(s -> s.equals(request.getRequestURI())))
+        if (Arrays.stream(UNAUTHENTICATED_ENDPOINTS).anyMatch(s -> request.getRequestURI().startsWith(s)))
             return true;
-
+            
         // check if the user session has a user attributed to it
         // this user is attributed to a session upon successful login
         HttpSession session = request.getSession(true);

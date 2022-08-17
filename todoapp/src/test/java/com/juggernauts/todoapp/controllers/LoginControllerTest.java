@@ -47,7 +47,7 @@ public class LoginControllerTest {
         String password = "password";
         User user = new User(password, email, false);
 
-        when(userService.findUserByEmail(matches(email))).thenReturn(user);
+        when(userService.getUser(matches(email))).thenReturn(user);
 
         MvcResult result = mvc
             .perform(post("/login")
@@ -64,7 +64,7 @@ public class LoginControllerTest {
         String email = "email@test.com";
         String password = "password";
 
-        when(userService.findUserByEmail(matches(email))).thenReturn(null);
+        when(userService.getUser(matches(email))).thenReturn(null);
 
         MvcResult result = mvc
             .perform(post("/login")
@@ -128,7 +128,7 @@ public class LoginControllerTest {
         String password = "password";
         User user = new User(password, email, false);
 
-        when(userService.findUserByEmail(email)).thenReturn(user);
+        when(userService.getUser(email)).thenReturn(user);
 
         MvcResult result = mvc
             .perform(post("/register")

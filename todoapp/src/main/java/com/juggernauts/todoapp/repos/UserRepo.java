@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.email = ?1")
-    User findUserByEmail(String username);
+    User findOne(String username);
 }

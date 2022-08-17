@@ -35,3 +35,13 @@ build/
 ### Project ###
 .DS_STORE
 secrets.properties
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Docker files
+docker-compose.yml
+Dockerfile
+*.sh
