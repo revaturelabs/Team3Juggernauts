@@ -43,6 +43,7 @@ public class ReminderSchedulerTest {
         mockReminder = mock(Reminder.class);
         mockTask = mock(Task.class);
         
+        when(mockReminder.getRepeatEvery()).thenReturn(null);
         when(mockTask.getUser()).thenReturn(mock(User.class));
         when(mockReminder.getTask()).thenReturn(mockTask);
 

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.juggernauts.todoapp.models")
-@EnableJpaRepositories(basePackages = "com.juggernauts.todoapp.repos")
+// @EnableJpaRepositories(basePackages = "com.juggernauts.todoapp.repos")
 @EnableFeignClients
 public class TodoappApplication {
 	public static void main(String[] args) {

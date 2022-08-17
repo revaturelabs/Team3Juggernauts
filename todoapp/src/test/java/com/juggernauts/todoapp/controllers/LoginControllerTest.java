@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.services.EmailVerificationService;
 import com.juggernauts.todoapp.services.MailService;
 import com.juggernauts.todoapp.services.UserService;
 import com.juggernauts.todoapp.web.LoginController;
@@ -30,11 +31,9 @@ public class LoginControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    private UserService userService;
-
-    @MockBean
-    private MailService mailService;
+    @MockBean private UserService userService;
+    @MockBean private EmailVerificationService emailVerificationService;
+    @MockBean private MailService mailService;
 
     @Before
     public void init() {
