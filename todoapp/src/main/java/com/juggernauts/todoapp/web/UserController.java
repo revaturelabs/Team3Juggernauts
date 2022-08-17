@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createNewUser(@RequestBody User user) {
         userService.addUser(user);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(user.getEmail()+ "added successfully!");
     };
 
 

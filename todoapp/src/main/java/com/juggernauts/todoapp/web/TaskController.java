@@ -27,10 +27,6 @@ public class TaskController {
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
-//    @Autowired
-//    public void setTaskService(TaskService taskService) {
-//        this.taskService = taskService;
-//    }
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -39,38 +35,35 @@ public class TaskController {
         // Will be removed after currentUser is implemented
         User currentUser = new User(1, "testpass1", "test1");
 
-        // This will all STAY once currentUser is available from userSession
-        task.setUser(currentUser);
-        taskService.addTask(task);
-        return ResponseEntity.ok(task);
-    };
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping("/bad")
-    public ResponseEntity createNewTask2(@RequestBody Task task) {
+        try {
+            // This will all STAY once currentUser is available from userSession
+            task.setUser(currentUser);
+        }
+        catch (Exception e) {
+            return ResponseEntity.badRequest().body("An error occured.");
+        }
 
-        // Will be removed after currentUser is implemented
-        User currentUser = new User(2, "testpass1", "test1");
+        return ResponseEntity.ok("Task added successfully");
+    }
 
-        // This will all STAY once currentUser is available from userSession
-        task.setUser(currentUser);
-        taskService.addTask(task);
-        return ResponseEntity.ok(task);
-    };
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity viewAllTasks() throws JsonProcessingException {
+    public ResponseEntity viewAllTasks()  {
         // Testing
         User currentUser = new User(1, "testpass1", "test1");
 
-
-        List<Task> usersTasks;
-        usersTasks = taskService.getTasks(currentUser);
-        for (Task task: usersTasks) {
-            System.out.println(task);
+        try {
+            List<Task> usersTasks;
+            usersTasks = taskService.getTasks(currentUser);
+            ObjectMapper om = new ObjectMapper();
+            return ResponseEntity.ok(om.writeValueAsString(usersTasks));
         }
-        System.out.println("NO ERROR YET!!!!!!");
-        ObjectMapper om = new ObjectMapper();
-        return ResponseEntity.ok(om.writeValueAsString(usersTasks));
+        catch (JsonProcessingException e) {
+            return ResponseEntity.internalServerError().body("An error occured.");
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity.unprocessableEntity().body("No tasks found.");
+        }
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

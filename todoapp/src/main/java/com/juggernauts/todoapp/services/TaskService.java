@@ -23,22 +23,20 @@ public class TaskService {
     //    @Autowired
 //    public void setTaskRepo(TaskRepo taskRepo) {this.taskRepo = taskRepo;}
 
-    public String addTask(Task task) {
-        taskRepo.save(task);
-        return task.toString();
-    };
+    public void addTask(Task task) throws RuntimeException {
+            taskRepo.save(task);
+    }
 
-    public List<Task> getTasks(User user) {
-        System.out.println("ENTERED GET TASKS!@#)($@)(*#$)(@#%@#*$@#)(*%");
+    public List<Task> getTasks(User user) throws NoSuchElementException {
+
         List<Task> allTasks = taskRepo.findAll();
-        System.out.println("ALL TASKS: "+allTasks);
+
         List<Task> usersTasks = allTasks.stream()
                 .filter(task -> task.getUser().getId() == user.getId())
                 .collect(Collectors.toList());
-        System.out.println("USERS TASKS: ");
-        usersTasks.forEach(System.out::println);
-        System.out.println("END OF USERS TASKS");
-        System.out.println("RETURNING USER TASKS!!!!#%*)@&#^%*)@#^%(*@#)*^@!$*&@");
+        if (usersTasks.isEmpty()) {
+            throw new NoSuchElementException();
+        }
         return usersTasks;
     }
 
