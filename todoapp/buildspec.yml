@@ -7,11 +7,11 @@ phases:
   build:
     commands:
       - echo "Entered build phase"
-      - cd todoapp && mvn clean prepare-package war:exploded
+      - cd mvn clean prepare-package war:exploded
   post_build:
     commands:
       - echo "Entered the post-build phase"
-      - cd todoapp && mv target/deploy ./
+      - cd mv target/deploy ./
 artifacts:
   files:
     - deploy/**/*
