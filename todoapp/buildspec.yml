@@ -1,14 +1,9 @@
 version: 0.2
 
-env:
-  secrets-manager:
-    DOCKERHUB_PASS: "/dockerhub/credentials:password"
-    DOCKERHUB_USERNAME: "/dockerhub/credentials:username"
 phases:
   pre_build:
     commands:
       - echo "Entered the pre-build phase"
-      - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASS
   build:
     commands:
       - echo "Entered build phase"
