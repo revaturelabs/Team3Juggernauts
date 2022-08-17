@@ -16,9 +16,9 @@ public class TodoappApplication {
     public static void main(String[] args) {
         SpringApplication.run(TodoappApplication.class, args);
 
-        Tweet tweet = new Tweet();
-        String tw = "Java API test.";
-        tweet.shareApp(tw);
+//        Tweet tweet = new Tweet();
+//        String tw = "Java API test.";
+//        tweet.shareApp(tw);
 
     }
 }
