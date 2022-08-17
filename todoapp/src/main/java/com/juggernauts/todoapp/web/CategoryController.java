@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,8 +31,6 @@ public class CategoryController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createNewCategory(@RequestBody Category category) {
-        System.out.println(category);
-
         // This will be DELETED once currentUser is available from userSession
         User currentUser = new User(1, "testpass1", "test1");
 //        System.out.println("Made user: " + currentUser);
@@ -40,9 +39,13 @@ public class CategoryController {
         // This will all STAY once currentUser is available from userSession
         category.setUser(currentUser);
 
-
-        categoryService.addCategory(category);
-        return ResponseEntity.ok(category);
+        try {
+            categoryService.addCategory(category);
+            return ResponseEntity.ok(category);
+        }
+        catch (InvalidParameterException e) {
+            return ResponseEntity.badRequest().body("Invalid category name");
+        }
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

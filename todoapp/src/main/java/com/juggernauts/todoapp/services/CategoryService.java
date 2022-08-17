@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,9 +24,14 @@ public class CategoryService {
     public void setCategoryRepo(CategoryRepo categoryRepo) {this.categoryRepo = categoryRepo;}
 
 
-    public String addCategory(Category category) {
-        categoryRepo.save(category);
-        return category.toString();
+    public void addCategory(Category category) throws InvalidParameterException {
+        try {
+            categoryRepo.save(category);
+        }
+        catch (Exception e) {
+            throw new InvalidParameterException();
+        }
+
     }
 
     public List<Category> getAllCategoriesForUser(User currentUser) {
