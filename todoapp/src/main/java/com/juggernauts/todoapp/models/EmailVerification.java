@@ -28,4 +28,9 @@ public class EmailVerification {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "user_id")
     private User user;
+
+    public EmailVerification(String token, User user) {
+        this.token = token;
+        this.user = user;
+    }
 }

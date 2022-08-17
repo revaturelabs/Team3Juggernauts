@@ -3,16 +3,21 @@ package com.juggernauts.todoapp.components;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.juggernauts.todoapp.models.Reminder;
-import com.juggernauts.todoapp.models.Task;
-import com.juggernauts.todoapp.services.MailService;
-import com.juggernauts.todoapp.services.ReminderService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.juggernauts.todoapp.models.Reminder;
+import com.juggernauts.todoapp.models.Task;
+import com.juggernauts.todoapp.services.MailService;
+import com.juggernauts.todoapp.services.ReminderService;
+
+/**
+ * The component for scheduling reminder notifications
+ * @author Jacob
+ */
 @Component
 public class ReminderScheduler {
     private static final Logger logger = LogManager.getLogger(ReminderScheduler.class);
@@ -56,7 +61,7 @@ public class ReminderScheduler {
                 // queue reminder for later deletion since it's not repeatable
                 deleteReminders.add(reminder);
             }
-
+            
             logger.info("reminded {} of {}", reminderTask.getUser().getEmail(), reminderTask.getName());
         }
 

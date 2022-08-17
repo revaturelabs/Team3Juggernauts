@@ -1,4 +1,5 @@
 package com.juggernauts.todoapp.models;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,34 +10,11 @@ import java.util.List;
 @Table(name = "tasks")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Task {
 
-    public Task(String name, Date completeBy, User user) {
-        this.name = name;
-        this.completeBy = completeBy;
-        this.user = user;
-    }
-
-    public Task(String name, String description, User user) {
-        this.name = name;
-        this.description = description;
-        this.user = user;
-    }
-
-    public Task(String name, Date completeBy, String description, User user) {
-        this.name = name;
-        this.completeBy = completeBy;
-        this.description = description;
-        this.user = user;
-    }
-
-    public Task(String name, User user) {
-        this.name = name;
-        this.user = user;
-    }
     // NON RELATIONAL FIELDS
 
     @Id
@@ -62,7 +40,7 @@ public class Task {
 //    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
 //    private int userId;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
     private User user;
 
@@ -70,24 +48,64 @@ public class Task {
 //    @Column(name = "group_id", columnDefinition = "INTEGER")
 //    private int groupId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="group_id", referencedColumnName = "group_id", columnDefinition = "INTEGER")
-    private Group group;
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name="group_id", referencedColumnName = "group_id", columnDefinition = "INTEGER")
+//    private Group group;
 
 
     // used in a previous version
 //    @Column(name = "category_id", columnDefinition = "INTEGER")
 //    private int categoryId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name="category_id", referencedColumnName = "category_id", columnDefinition = "INTEGER")
     private Category category;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task")
     private List<Reminder> reminders;
 
+    public Task(int taskId) {
+        this.taskId = taskId;
+    }
 
+    public Task(int taskId, String name) {
+        this.taskId = taskId;
+        this.name = name;
+    }
 
+    public Task(String name, Date completeBy, User user) {
+        this.name = name;
+        this.completeBy = completeBy;
+        this.user = user;
+    }
 
+    public Task(String name, String description, User user) {
+        this.name = name;
+        this.description = description;
+        this.user = user;
+    }
 
+    public Task(String name, Date completeBy, String description, User user) {
+        this.name = name;
+        this.completeBy = completeBy;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Task(String name, User user) {
+        this.name = name;
+        this.user = user;
+    }
+
+    public Task(int taskId, Category category) {
+        this.taskId = taskId;
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "{NAME: "+ this.name +
+                ", UserID: " + getUser().getId()+"}";
+    }
 }
+

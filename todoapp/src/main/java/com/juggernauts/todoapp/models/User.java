@@ -2,6 +2,8 @@ package com.juggernauts.todoapp.models;
 
 import lombok.*;
 import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,14 +33,35 @@ public class User {
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean emailVerified;
 
+    public User(int id, String password, String email, boolean emailVerified) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.emailVerified = emailVerified;
+    }
+
     public User(int id, String password, String email) {
         this.id = id;
         this.password = password;
         this.email = email;
+        this.emailVerified = false;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Category.class)
+    public User(String password, String email, boolean emailVerified) {
+        this.password = password;
+        this.email = email;
+        this.emailVerified = emailVerified;
+    }
+
+    public User(String password, String email) {
+        this.password = password;
+        this.email = email;
+        this.emailVerified = false;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class)
     @JoinColumn(name="category_id")
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<Category> categories;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -49,16 +72,17 @@ public class User {
 //    private Group group;
 //    private GroupMember groupMember;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "group_members",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
-    private Set<Group> groups;
+//    @OneToMany(cascade = CascadeType.MERGE,  mappedBy = "user")
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    private List<GroupMember> groupMember;
+//
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(name = "group_members",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
+//    private Set<Group> groups;
 
 
-    public User(String password, String email, boolean emailVerified) {
-        this.password = password;
-        this.email = email;
-        this.emailVerified = emailVerified;
-    }
+
+
 }

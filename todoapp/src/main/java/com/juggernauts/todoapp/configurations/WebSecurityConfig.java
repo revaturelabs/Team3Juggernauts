@@ -23,13 +23,13 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // setup /logout endpoint
-                .logout().invalidateHttpSession(true).logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()).and()
-
-                // required things for access to endpoints
-                .cors().and()
-                .csrf().disable();
-
+            // setup /logout endpoint
+            .logout().invalidateHttpSession(true).logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler()).and()
+            
+            // required things for access to endpoints
+            .cors().and()
+            .csrf().disable();
+            
         return http.build();
     }
 }

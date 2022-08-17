@@ -1,8 +1,9 @@
 package com.juggernauts.todoapp.repos;
 
+import com.juggernauts.todoapp.models.Reminder;
+
 import java.util.List;
 
-import com.juggernauts.todoapp.models.Reminder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

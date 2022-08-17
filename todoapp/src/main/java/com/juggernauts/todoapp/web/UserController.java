@@ -26,15 +26,8 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createNewUser(@RequestBody User user) {
         userService.addUser(user);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(user.getEmail()+ "added successfully!");
     };
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity viewAllTasks(@RequestBody User user) {
-        List<Task> usersTasks;
-        usersTasks = taskService.getTasks(user);
-        usersTasks.stream().forEach(System.out::println);
-        return ResponseEntity.ok(usersTasks);
-    }
+
 }

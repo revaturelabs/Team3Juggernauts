@@ -34,7 +34,7 @@ public class PropertiesFileLoaderServiceTest {
     @Test
     public void givenValidClassPathResource_whenGetProperties_thenReturnProperties() {
         ClassPathResource resource = new ClassPathResource("test.properties");
-        Properties props = propertiesFileLoaderService.getProperties(String.valueOf(resource)); //told me to wrap in string
+        Properties props = propertiesFileLoaderService.getProperties(resource);
         assertEquals("daisy", props.getProperty("cat.daisy.name", ""));
         assertEquals("benedict", props.getProperty("cat.benedict.name", ""));
         assertEquals("francis", props.getProperty("cat.francis.name", ""));
@@ -43,7 +43,7 @@ public class PropertiesFileLoaderServiceTest {
     @Test
     public void givenInvalidClassPathResource_whenGetProperties_thenReturnEmptyProperties() {
         ClassPathResource resource = new ClassPathResource("invalid.properties");
-        Properties props = propertiesFileLoaderService.getProperties(String.valueOf(resource)); //told me to wrap in string
+        Properties props = propertiesFileLoaderService.getProperties(resource);
         assertEquals(new Properties(), props);
     }
 }

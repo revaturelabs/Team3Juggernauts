@@ -4,75 +4,41 @@ import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.CategoryRepo;
+import com.juggernauts.todoapp.repos.TaskRepo;
+import com.juggernauts.todoapp.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletOutputStream;
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
-
 
 @Service
 public class CategoryService {
+    User currentUser;
     private CategoryRepo categoryRepo;
-    private TaskService taskService;
 
     @Autowired
-    public void setCategoryRepo(CategoryRepo categoryRepo) {
-        this.categoryRepo = categoryRepo;
-    }
+    public void setCategoryRepo(CategoryRepo categoryRepo) {this.categoryRepo = categoryRepo;}
 
-    @Transactional()
-    public int addCategory(Category category) {
-        if (category.getCategoryName() != null) {
+
+    public void addCategory(Category category) throws InvalidParameterException {
+        try {
             categoryRepo.save(category);
-            return 1;
         }
-        return -1;
-    }
-@Transactional
-    public int deleteCategory(Category category) {
-        boolean catExists = categoryRepo.existsById(category.getCategoryId());
-        if (catExists) {
-            categoryRepo.deleteById(category.getCategoryId());
-            return 1;
+        catch (Exception e) {
+            throw new InvalidParameterException();
         }
-        return -1;
+
     }
 
-    @Transactional
-    public int updateCategory(int id, String name) {
-        Category category = categoryRepo.findById(id).orElseThrow(() ->
-                new IllegalStateException("User with this id not found"));
-
-        if(name != null && name.length() > 0 && !name.equals(category.getCategoryName())){
-            category.setCategoryName(name);
-            return 1;
-        }
-        return -1;
-    }
-
-    public int viewCategory(int id, String name){
-        boolean categoryExists = categoryRepo.existsById(id);
-        if(!categoryExists){
-            return -1;
-        }
-        categoryRepo.findById(id);
-        return 1;
-    }
-
-    public List<Category> viewAllCategories(int id) {
+    public List<Category> getAllCategoriesForUser(User currentUser) {
         List<Category> allCategories = categoryRepo.findAll();
 
-        if(allCategories.isEmpty()){
-            return null;
-        }
-        return allCategories;
+        return allCategories.stream()
+                .filter(category -> category.getUser().getId() == currentUser.getId())
+                .collect(Collectors.toList());
     }
-
-
-
 }
-
