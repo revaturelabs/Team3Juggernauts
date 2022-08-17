@@ -46,4 +46,8 @@ public class Tweet {
         }
         return "Successfully updated the status in Twitter.";
     }
+<<<<<<< HEAD
     }
+=======
+}
+>>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb

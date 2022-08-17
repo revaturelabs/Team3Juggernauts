@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: postgres
+    password: vedzic-mekDi1-wepwuc
+    url: jdbc:postgresql://localhost:5432/todo
+    driver-class-name: org.postgresql.Driver
