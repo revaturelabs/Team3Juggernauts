@@ -11,9 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.juggernauts.todoapp.repos")
 @EnableFeignClients
 public class TodoappApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TodoappApplication.class, args);
 	}
-
 }
