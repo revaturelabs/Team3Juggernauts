@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Entered the pre-build phase"
+      - echo "Building on $(pwd)"
   build:
     commands:
       - echo "Entered build phase"
