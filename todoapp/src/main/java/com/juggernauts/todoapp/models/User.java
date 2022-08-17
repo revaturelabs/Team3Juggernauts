@@ -18,10 +18,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class User {
 
-<<<<<<< HEAD
-=======
-    // NON-RELATIONAL FIELDS
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -36,8 +32,6 @@ public class User {
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean emailVerified;
 
-<<<<<<< HEAD
-=======
     public User(int id, String password, String email, boolean emailVerified) {
         this.id = id;
         this.password = password;
@@ -45,14 +39,10 @@ public class User {
         this.emailVerified = emailVerified;
     }
 
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
     public User(int id, String password, String email) {
         this.id = id;
         this.password = password;
         this.email = email;
-<<<<<<< HEAD
-    }
-=======
         this.emailVerified = false;
     }
 
@@ -68,35 +58,8 @@ public class User {
         this.emailVerified = false;
     }
 
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class)
     @JoinColumn(name="category_id")
     @LazyCollection(LazyCollectionOption.FALSE)
     List<Category> categories;
-<<<<<<< HEAD
 }
-=======
-
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private EmailVerification emailVerification;
-//
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(referencedColumnName = "group_id")
-//    private Group group;
-//    private GroupMember groupMember;
-
-//    @OneToMany(cascade = CascadeType.MERGE,  mappedBy = "user")
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    private List<GroupMember> groupMember;
-//
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "group_members",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "group_id"))
-//    private Set<Group> groups;
-
-
-
-
-}
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb

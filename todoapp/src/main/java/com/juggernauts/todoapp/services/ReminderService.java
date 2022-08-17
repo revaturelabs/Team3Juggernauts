@@ -1,11 +1,6 @@
 package com.juggernauts.todoapp.services;
 
-<<<<<<< HEAD
-public class ReminderService {
-=======
-//import com.juggernauts.todoapp.models.Group;
 import com.juggernauts.todoapp.models.Reminder;
-//import com.juggernauts.todoapp.repos.GroupRepo;
 import com.juggernauts.todoapp.repos.ReminderRepo;
 
 import java.util.List;
@@ -32,5 +27,4 @@ public class ReminderService {
     public void deleteReminders(List<Reminder> reminders) {
         reminderRepo.deleteAll(reminders);
     }
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
 }

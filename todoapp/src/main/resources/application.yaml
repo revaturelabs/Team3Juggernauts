@@ -1,5 +1,5 @@
-spring:
-  datasource:
-    #url: jdbc:postgresql://juggernauts-db.cnwcxrrmq60v.us-east-1.rds.amazonaws.com:5432/todo?user=postgres&password=xiddy5-fikpor-keZjuv
-    url: jdbc:postgresql://localhost:5432/todo
-    driver-class-name: org.postgresql.Driver
+#spring:
+#  datasource:
+#    #url: jdbc:postgresql://juggernauts-db.cnwcxrrmq60v.us-east-1.rds.amazonaws.com:5432/todo?user=postgres&password=xiddy5-fikpor-keZjuv
+#    url: jdbc:postgresql://localhost:5432/todo
+#    driver-class-name: org.postgresql.Driver

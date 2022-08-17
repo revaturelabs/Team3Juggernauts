@@ -249,6 +249,7 @@ class CategoryServiceTest {
      *   <li>{@link CategoryService#setCategoryRepo(CategoryRepo)}
      * </ul>
      */
+
     @Test
     void testConstructor() {
         CategoryService actualCategoryService = new CategoryService();

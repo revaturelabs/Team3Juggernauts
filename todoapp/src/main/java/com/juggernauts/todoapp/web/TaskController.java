@@ -46,7 +46,6 @@ public class TaskController {
         return ResponseEntity.ok("Task added successfully");
     }
 
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity viewAllTasks()  {
         // Testing
@@ -110,8 +109,4 @@ public class TaskController {
             return ResponseEntity.badRequest().body(task.getTaskId());
         }
     }
-
-
-
-
 }

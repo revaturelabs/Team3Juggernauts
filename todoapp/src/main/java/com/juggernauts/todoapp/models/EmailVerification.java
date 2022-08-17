@@ -21,12 +21,6 @@ public class EmailVerification {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String token;
 
-<<<<<<< HEAD
-    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
-    private int userId;
-}
-=======
-    // used in a previous version
 //    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
 //    private int userId;
 
@@ -39,4 +33,3 @@ public class EmailVerification {
         this.user = user;
     }
 }
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb

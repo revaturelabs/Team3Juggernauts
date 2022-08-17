@@ -46,49 +46,47 @@ public class TaskServiceTest {
         taskMock = new Task("taskOne", "descriptionOne", user );
  }
 
-
-
-    @Test
-   public void addTaskSuccessful() {
-        int expected = 1;
-        when(taskRepoMock.save(taskMock)).thenReturn(taskMock);
-        int actual = taskServiceMock.addTask(taskMock);
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void addTaskFail() {
-        Task nullTask = null;
-        int creationFailed = -1;
-        when(taskRepoMock.save(taskMock)).thenReturn(taskMock);
-        int actual = taskServiceMock.addTask(nullTask);
-       assertEquals(creationFailed, actual);
-
-    }
-    @Test
-    public void deleteTask() {
-        int expected =1;
-        int actual = taskServiceMock.deleteTask(taskMock.getTaskId());
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void updateIsDone() {
-        int expected = 1;
-       when(taskServiceMock.updateIsDone(taskMock)).thenReturn(1);
-        int actual = taskServiceMock.updateIsDone(taskMock);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void successfulGetTask() {
-        int expected = 1;
-        when(taskRepoMock.findById(taskMock.getTaskId())).thenReturn(Optional.ofNullable(taskMock));
-        when(taskServiceMock.getTask(taskMock.getTaskId())).thenReturn(1);
-        int actual = taskServiceMock.getTask(1);
-        assertEquals(expected,actual);
-    }
+//    @Test
+//   public void addTaskSuccessful() {
+//        int expected = 1;
+//        when(taskRepoMock.save(taskMock)).thenReturn(taskMock);
+//        int actual = taskServiceMock.addTask(taskMock);
+//        assertEquals(expected, actual);
+//
+//    }
+//
+//    @Test
+//    public void addTaskFail() {
+//        Task nullTask = null;
+//        int creationFailed = -1;
+//        when(taskRepoMock.save(taskMock)).thenReturn(taskMock);
+//        int actual = taskServiceMock.addTask(nullTask);
+//       assertEquals(creationFailed, actual);
+//
+//    }
+//    @Test
+//    public void deleteTask() {
+//        int expected =1;
+//        int actual = taskServiceMock.deleteTask(taskMock.getTaskId());
+//        assertEquals(expected, actual);
+//    }
+//
+//    @Test
+//    public void updateIsDone() {
+//        int expected = 1;
+//       when(taskServiceMock.updateIsDone(taskMock)).thenReturn(1);
+//        int actual = taskServiceMock.updateIsDone(taskMock);
+//        assertEquals(expected, actual);
+//    }
+//
+//    @Test
+//    public void successfulGetTask() {
+//        int expected = 1;
+//        when(taskRepoMock.findById(taskMock.getTaskId())).thenReturn(Optional.ofNullable(taskMock));
+//        when(taskServiceMock.getTask(taskMock.getTaskId())).thenReturn(1);
+//        int actual = taskServiceMock.getTask(1);
+//        assertEquals(expected,actual);
+//    }
 
     @Test
     public void getAllTasksByUserId() {

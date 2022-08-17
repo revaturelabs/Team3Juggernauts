@@ -1,27 +1,13 @@
 package com.juggernauts.todoapp.services;
 
-<<<<<<< HEAD
-import com.juggernauts.todoapp.models.Task;
-import com.juggernauts.todoapp.models.User;
-import com.juggernauts.todoapp.repositories.TaskRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-=======
 import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
 import java.util.stream.Collectors;
 
 @Service
@@ -33,29 +19,8 @@ public class TaskService {
         this.taskRepo = taskRepo;
     }
 
-<<<<<<< HEAD
-    public String addTask(Task task) {
-        taskRepo.save(task);
-        return task.toString();
-    };
-
-    public List<Task> getTasks(User user) {
-        System.out.println("******************* ENTERED GET TASKS! *******************");
-        List<Task> allTasks = taskRepo.findAll();
-        System.out.println("ALL TASKS: "+allTasks);
-        List<Task> usersTasks = allTasks.stream()
-                .filter(task -> task.getUser().getId() == user.getId())
-                .collect(Collectors.toList());
-        System.out.println("USERS TASKS: ");
-        usersTasks.forEach(System.out::println);
-        System.out.println("******************* END OF USERS TASKS *******************");
-        System.out.println("******************* RETURNING USER TASKS!!!! *******************");
-=======
-    //    @Autowired
-//    public void setTaskRepo(TaskRepo taskRepo) {this.taskRepo = taskRepo;}
-
     public void addTask(Task task) throws RuntimeException {
-            taskRepo.save(task);
+        taskRepo.save(task);
     }
 
     public List<Task> getTasks(User user) throws NoSuchElementException {
@@ -68,37 +33,23 @@ public class TaskService {
         if (usersTasks.isEmpty()) {
             throw new NoSuchElementException();
         }
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
         return usersTasks;
     }
 
     public HashMap<String, List<Task>> getAllTasksPerCategory(User currentUser) {
         // testing
-<<<<<<< HEAD
-        System.out.println("******************* ENTERED TASK SERVICE! *******************");
-=======
         System.out.println("!*!*!*!*!*!*!*!*!*!*ENTERED TASK SERVICE!*!*!*!*!*!*!*!*!");
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
 
         List<Task> usersTasks = getTasks(currentUser);
 
         HashMap<String, List<Task>> tasksToCategory = new HashMap<>();
 
         // Put all incomplete tasks without category into None category
-<<<<<<< HEAD
-        List<Task> incompleteTasks = usersTasks.stream().filter(task -> task.getCategory() == null && !task.isDone())
-                .collect(Collectors.toList());
-        System.out.println("======================================INCOMPLETE TASKS:============================");
-        incompleteTasks.forEach(System.out::println);
-        tasksToCategory.put("None", incompleteTasks);
-        System.out.println("******************* INCOMPLETE TASKS ADDED TO HASHMAP *******************");
-=======
         List<Task> incompleteTasks = usersTasks.stream().filter(task -> task.getCategory() == null && !task.isDone()).collect(Collectors.toList());
         System.out.println("======================================INCOMPLETE TASKS:============================");
         incompleteTasks.forEach(System.out::println);
         tasksToCategory.put("None", incompleteTasks);
         System.out.println("INCOMPLETE TASKS ADDED TO HASHMAP");
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
 
         System.out.println(tasksToCategory);
 
@@ -117,11 +68,7 @@ public class TaskService {
         incompleteCategorizedTasks.forEach(task -> categoryNames.add(task.getCategory().getCategoryName()));
 
 
-<<<<<<< HEAD
-        System.out.println("======================================== CATEGORY NAMES: ===========================");
-=======
         System.out.println("========================================CATEGORY NAMES:===========================");
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
         categoryNames.forEach(System.out::println);
 
         // go through all of users tasks putting each list of tasks per category in its appropriate category.
@@ -131,11 +78,7 @@ public class TaskService {
                     List<Task> tasksPerCategory = incompleteCategorizedTasks.stream()
                             .filter(task -> task.getCategory().getCategoryName().equals(categoryName))
                             .collect(Collectors.toList());
-<<<<<<< HEAD
-                    System.out.println("****************** CATEGORY NAME: ****************");
-=======
                     System.out.println("******************CATEGORY NAME:****************");
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
                     tasksPerCategory.forEach(System.out::println);
                     tasksToCategory.put(categoryName, tasksPerCategory);
                 }
@@ -143,9 +86,6 @@ public class TaskService {
 
         return tasksToCategory;
     }
-<<<<<<< HEAD
-}
-=======
 
     public void resolveTask(int taskId) throws NoSuchElementException {
         Task task = taskRepo.findById(taskId).orElseThrow(NoSuchElementException::new);
@@ -160,4 +100,3 @@ public class TaskService {
         task.setCategory(new Category());
     }
 }
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb

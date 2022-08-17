@@ -6,18 +6,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
 @Entity
 @Table(name = "categories")
 @Getter
 @Setter
-<<<<<<< HEAD
 
-=======
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
@@ -30,13 +23,6 @@ public class Category {
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(32) CHECK (name != 'Complete')")
     private String categoryName;
 
-<<<<<<< HEAD
-=======
-    // This is from a previous "version"
-//    @Column(name = "user_id", nullable = false, columnDefinition = "INTEGER")
-//    private int userId;
-
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
     @JsonIgnore
@@ -59,8 +45,4 @@ public class Category {
                 ", tasks=" + tasks +
                 '}';
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f7791cd5abc766eb0f668e623c688b21a342ebcb
