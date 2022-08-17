@@ -1,10 +1,13 @@
 package com.juggernauts.todoapp.models;
 
 import lombok.*;
-
-import java.io.Serializable;
+import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -13,7 +16,8 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -28,9 +32,13 @@ public class User implements Serializable {
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean emailVerified;
 
-    public User(String password, String email, boolean emailVerified) {
+    public User(int id, String password, String email) {
+        this.id = id;
         this.password = password;
         this.email = email;
-        this.emailVerified = emailVerified;
     }
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class)
+    @JoinColumn(name="category_id")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    List<Category> categories;
 }

@@ -19,8 +19,9 @@ public class Reminder {
     @Column (name = "reminder_id")
     private int reminderId;
 
-    @Column(name = "task_id", nullable = false, columnDefinition = "INTEGER")
-    private int taskId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
+    private Task task;
 
     @Column(name = "remind_by", nullable = false, columnDefinition = "DATE")
     private Date remindBy;

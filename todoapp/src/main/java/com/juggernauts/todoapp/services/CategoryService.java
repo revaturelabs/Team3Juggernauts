@@ -13,7 +13,6 @@ import java.util.Objects;
 @Service
 public class CategoryService {
     private CategoryRepo categoryRepo;
-
     @Autowired
     public void setCategoryRepo(CategoryRepo categoryRepo) {
         this.categoryRepo = categoryRepo;
