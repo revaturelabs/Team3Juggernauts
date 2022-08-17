@@ -10,13 +10,10 @@ import java.util.List;
 @Table(name = "tasks")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Task {
-
-    // NON RELATIONAL FIELDS
-
 
     // NON RELATIONAL FIELDS
 
@@ -60,12 +57,21 @@ public class Task {
 //    @Column(name = "category_id", columnDefinition = "INTEGER")
 //    private int categoryId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name="category_id", referencedColumnName = "category_id", columnDefinition = "INTEGER")
     private Category category;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "task")
     private List<Reminder> reminders;
+
+    public Task(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public Task(int taskId, String name) {
+        this.taskId = taskId;
+        this.name = name;
+    }
 
     public Task(String name, Date completeBy, User user) {
         this.name = name;
@@ -90,4 +96,16 @@ public class Task {
         this.name = name;
         this.user = user;
     }
+
+    public Task(int taskId, Category category) {
+        this.taskId = taskId;
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "{NAME: "+ this.name +
+                ", UserID: " + getUser().getId()+"}";
+    }
 }
+

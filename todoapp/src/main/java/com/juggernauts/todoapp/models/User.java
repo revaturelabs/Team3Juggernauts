@@ -33,10 +33,10 @@ public class User {
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean emailVerified;
 
-    public User(String password, String email, boolean emailVerified) {
+    public User(int id, String password, String email) {
+        this.id = id;
         this.password = password;
         this.email = email;
-        this.emailVerified = emailVerified;
     }
 
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Category.class)
@@ -61,4 +61,8 @@ public class User {
 //            joinColumns = @JoinColumn(name = "user_id"),
 //            inverseJoinColumns = @JoinColumn(name = "group_id"))
 //    private Set<Group> groups;
+
+
+
+
 }
