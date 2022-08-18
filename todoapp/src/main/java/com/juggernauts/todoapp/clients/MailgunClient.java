@@ -1,7 +1,8 @@
 package com.juggernauts.todoapp.clients;
 
+import java.net.URI;
+
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,7 +13,7 @@ import com.juggernauts.todoapp.models.MailgunResponse;
  * The client and configurations for the Mailgun API service
  * @author Jacob
  */
-@FeignClient(contextId="mailgunClient", name="mailService", url="https://api.mailgun.net/v3/sandbox2f4262e762e340fe926e9817e52a3ca1.mailgun.org", configuration=MailgunConfig.class)
+@FeignClient(contextId="mailgunClient", name="mailService", url="http://meow.com", configuration=MailgunConfig.class)
 public interface MailgunClient {
     /**
      * Makes a POST request to the /messages endpoint of the Mailgun API service
@@ -23,5 +24,5 @@ public interface MailgunClient {
      * @return A MailgunResponse object showing the ID and status of the email
      */
     @PostMapping("/messages")
-    MailgunResponse sendEmail(@RequestParam String from, @RequestParam String to, @RequestParam String subject, @RequestParam String text);
+    void sendEmail(URI baseUrl, @RequestParam String from, @RequestParam String to, @RequestParam String subject, @RequestParam String text);
 }

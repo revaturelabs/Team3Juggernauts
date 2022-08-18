@@ -1,14 +1,10 @@
 package com.juggernauts.todoapp.configurations;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-
-import com.juggernauts.todoapp.services.PropertiesFileLoaderService;
 
 import feign.Contract;
 import feign.auth.BasicAuthRequestInterceptor;
@@ -35,11 +31,10 @@ public class MailgunConfig {
      * @throws IOException
      */
     @Bean
-    public BasicAuthRequestInterceptor basicAuthRequestInterceptor(PropertiesFileLoaderService props) throws IOException {
-        Properties properties = props.getProperties(new ClassPathResource("secrets.properties"));
+    public BasicAuthRequestInterceptor basicAuthRequestInterceptor(MailgunPropertiesConfig props) throws IOException {
         return new BasicAuthRequestInterceptor(
-            properties.getProperty("mailgun.user.username", ""), 
-            properties.getProperty("mailgun.user.password", "")
+            props.getMailgunUsername(),
+            props.getMailgunPassword()
         );
     }
 }

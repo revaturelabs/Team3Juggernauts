@@ -37,7 +37,7 @@ public class LoginControllerTest {
 
     @Before
     public void init() {
-        when(mailService.sendEmail(anyString(), anyString(), anyString())).thenReturn(null);
+        doNothing().when(mailService).sendEmail(anyString(), anyString(), anyString());
     }
 
     @Test
