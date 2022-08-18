@@ -1,6 +1,8 @@
 package com.juggernauts.todoapp.configurations;
 
-import com.juggernauts.todoapp.services.PropertiesFileLoaderService;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.juggernauts.todoapp.configurations.interceptors.services.PropertiesFileLoaderService;
 
 import java.io.IOException;
 
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -20,6 +23,14 @@ class MailgunConfigTest {
 
     @Autowired
     private PropertiesFileLoaderService propertiesFileLoaderService;
+
+    /**
+     * Method under test: {@link MailgunConfig#mailgunContract()}
+     */
+    @Test
+    void testMailgunContract() {
+        assertTrue(mailgunConfig.mailgunContract() instanceof SpringMvcContract);
+    }
 
     /**
      * Method under test: {@link MailgunConfig#basicAuthRequestInterceptor(PropertiesFileLoaderService)}

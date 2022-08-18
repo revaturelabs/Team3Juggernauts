@@ -1,5 +1,6 @@
 package com.juggernauts.todoapp.components;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
-import com.juggernauts.todoapp.services.MailService;
-import com.juggernauts.todoapp.services.ReminderService;
+import com.juggernauts.todoapp.configurations.interceptors.services.MailService;
+import com.juggernauts.todoapp.configurations.interceptors.services.ReminderService;
 
 /**
  * The component for scheduling reminder notifications
@@ -69,4 +70,6 @@ public class ReminderScheduler {
         reminderService.deleteReminders(deleteReminders);
         logger.info("deleted {} reminders", deleteReminders.size());
     }
+
+
 }

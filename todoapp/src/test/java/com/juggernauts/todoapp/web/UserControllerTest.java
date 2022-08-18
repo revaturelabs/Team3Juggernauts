@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.TaskRepo;
 import com.juggernauts.todoapp.repos.UserRepo;
-import com.juggernauts.todoapp.services.TaskService;
-import com.juggernauts.todoapp.services.UserService;
+import com.juggernauts.todoapp.configurations.interceptors.services.TaskService;
+import com.juggernauts.todoapp.configurations.interceptors.services.UserService;
 
 import java.util.ArrayList;
 

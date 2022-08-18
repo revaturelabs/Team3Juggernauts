@@ -35,5 +35,33 @@ class UserTest {
         assertEquals(1, actualUser.getId());
         assertEquals("jane.doe@example.org", actualUser.getEmail());
     }
+
+    /**
+     * Method under test: {@link User#User(String, String)}
+     */
+    @Test
+    void testConstructor3() {
+        User actualUser = new User("iloveyou", "jane.doe@example.org");
+
+        assertNull(actualUser.getCategories());
+        assertFalse(actualUser.isEmailVerified());
+        assertEquals("iloveyou", actualUser.getPassword());
+        assertEquals(0, actualUser.getId());
+        assertEquals("jane.doe@example.org", actualUser.getEmail());
+    }
+
+    /**
+     * Method under test: {@link User#User(String, String, boolean)}
+     */
+    @Test
+    void testConstructor4() {
+        User actualUser = new User("iloveyou", "jane.doe@example.org", true);
+
+        assertNull(actualUser.getCategories());
+        assertTrue(actualUser.isEmailVerified());
+        assertEquals("iloveyou", actualUser.getPassword());
+        assertEquals(0, actualUser.getId());
+        assertEquals("jane.doe@example.org", actualUser.getEmail());
+    }
 }
 

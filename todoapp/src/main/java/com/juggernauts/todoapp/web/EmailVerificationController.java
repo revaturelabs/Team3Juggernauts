@@ -2,8 +2,8 @@ package com.juggernauts.todoapp.web;
 
 import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.User;
-import com.juggernauts.todoapp.services.EmailVerificationService;
-import com.juggernauts.todoapp.services.UserService;
+import com.juggernauts.todoapp.configurations.interceptors.services.EmailVerificationService;
+import com.juggernauts.todoapp.configurations.interceptors.services.UserService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailVerificationController {
     private static final Logger logger = LogManager.getLogger(EmailVerificationController.class);
     @Autowired EmailVerificationService emailVerificationService;
+
     @Autowired UserService userService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

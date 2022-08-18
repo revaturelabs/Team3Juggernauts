@@ -7,10 +7,10 @@ import com.juggernauts.todoapp.clients.MailgunClient;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.EmailVerificationRepo;
 import com.juggernauts.todoapp.repos.UserRepo;
-import com.juggernauts.todoapp.services.EmailVerificationService;
-import com.juggernauts.todoapp.services.MailService;
-import com.juggernauts.todoapp.services.TokenGenerationService;
-import com.juggernauts.todoapp.services.UserService;
+import com.juggernauts.todoapp.configurations.interceptors.services.EmailVerificationService;
+import com.juggernauts.todoapp.configurations.interceptors.services.MailService;
+import com.juggernauts.todoapp.configurations.interceptors.services.TokenGenerationService;
+import com.juggernauts.todoapp.configurations.interceptors.services.UserService;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -89,6 +89,37 @@ class LoginControllerTest {
         actualPerformResult.andExpect(MockMvcResultMatchers.status().isAccepted())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/plain;charset=ISO-8859-1"))
                 .andExpect(MockMvcResultMatchers.content().string("You have logged in."));
+    }
+
+    /**
+     * Method under test: {@link LoginController#register(String, String, HttpServletRequest)}
+     */
+    @Test
+    void testRegister() throws Exception {
+        User user = new User();
+        user.setCategories(new ArrayList<>());
+        user.setEmail("jane.doe@example.org");
+        user.setEmailVerified(true);
+        user.setId(1);
+        user.setPassword("iloveyou");
+
+        User user1 = new User();
+        user1.setCategories(new ArrayList<>());
+        user1.setEmail("jane.doe@example.org");
+        user1.setEmailVerified(true);
+        user1.setId(1);
+        user1.setPassword("iloveyou");
+        when(userRepo.findOne((String) any())).thenReturn(user);
+        when(userRepo.save((User) any())).thenReturn(user1);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/register")
+                .param("email", "foo")
+                .param("password", "foo");
+        ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(loginController)
+                .build()
+                .perform(requestBuilder);
+        actualPerformResult.andExpect(MockMvcResultMatchers.status().is(400))
+                .andExpect(MockMvcResultMatchers.content().contentType("text/plain;charset=ISO-8859-1"))
+                .andExpect(MockMvcResultMatchers.content().string("This email is taken."));
     }
 }
 
