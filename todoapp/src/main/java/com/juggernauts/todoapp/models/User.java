@@ -18,6 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class User {
 
+    // NON-RELATIONAL FIELDS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -62,4 +63,5 @@ public class User {
     @JoinColumn(name="category_id")
     @LazyCollection(LazyCollectionOption.FALSE)
     List<Category> categories;
+
 }

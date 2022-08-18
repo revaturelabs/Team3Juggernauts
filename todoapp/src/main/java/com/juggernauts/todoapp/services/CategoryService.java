@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
-    User currentUser;
+    public User currentUser;
     private CategoryRepo categoryRepo;
 
     @Autowired

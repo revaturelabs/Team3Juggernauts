@@ -14,19 +14,18 @@ import twitter4j.auth.AccessToken;
 
 public class Tweet {
 
-    public Tweet() {
-    }
+    public Tweet(){}
 
     String tw = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
 
 
-    public String shareApp(String tw) {
+    public String shareApp(String tw){
 
         System.out.println();
         System.out.println("*************** TWEET in Progress *********************");
 
         String API_KEY = "foo";
-        String API_KEY_SECRET = "foo";
+        String API_KEY_SECRET ="foo";
         String ACCESS_TOKEN = "foo-bar";
         String ACCESS_TOKEN_SECRET = "foo";
 

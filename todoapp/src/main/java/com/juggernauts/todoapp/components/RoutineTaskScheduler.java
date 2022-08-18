@@ -1,5 +1,6 @@
 package com.juggernauts.todoapp.components;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import com.juggernauts.todoapp.services.ReminderService;
  * @author Jacob
  */
 @Component
-public class ReminderScheduler {
+public class RoutineTaskScheduler {
     private static final Logger logger = LogManager.getLogger(ReminderScheduler.class);
 
     @Autowired private ReminderService reminderService;
@@ -69,4 +70,6 @@ public class ReminderScheduler {
         reminderService.deleteReminders(deleteReminders);
         logger.info("deleted {} reminders", deleteReminders.size());
     }
+
+
 }

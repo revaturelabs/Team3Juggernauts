@@ -10,7 +10,6 @@ import java.util.List;
 @Table(name = "categories")
 @Getter
 @Setter
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
@@ -22,6 +21,10 @@ public class Category {
 
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(32) CHECK (name != 'Complete')")
     private String categoryName;
+
+    // This is from a previous "version"
+//    @Column(name = "user_id", nullable = false, columnDefinition = "INTEGER")
+//    private int userId;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")

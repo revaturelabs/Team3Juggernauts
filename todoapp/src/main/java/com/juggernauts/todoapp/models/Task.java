@@ -15,6 +15,8 @@ import java.util.List;
 
 public class Task {
 
+    // NON RELATIONAL FIELDS
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
@@ -32,9 +34,28 @@ public class Task {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    // RELATIONAL FIELDS
+
+    // used in previous version
+//    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
+//    private int userId;
+
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "user_id", columnDefinition = "INTEGER")
     private User user;
+
+    // used in a previous version
+//    @Column(name = "group_id", columnDefinition = "INTEGER")
+//    private int groupId;
+
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name="group_id", referencedColumnName = "group_id", columnDefinition = "INTEGER")
+//    private Group group;
+
+
+    // used in a previous version
+//    @Column(name = "category_id", columnDefinition = "INTEGER")
+//    private int categoryId;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name="category_id", referencedColumnName = "category_id", columnDefinition = "INTEGER")

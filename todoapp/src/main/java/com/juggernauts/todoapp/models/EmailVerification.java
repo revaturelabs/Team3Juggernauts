@@ -21,6 +21,7 @@ public class EmailVerification {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String token;
 
+    // used in a previous version
 //    @Column(name = "user_id",nullable = false, columnDefinition = "INTEGER")
 //    private int userId;
 
