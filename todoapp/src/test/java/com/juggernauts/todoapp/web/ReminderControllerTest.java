@@ -1,18 +1,18 @@
 package com.juggernauts.todoapp.web;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juggernauts.todoapp.configurations.interceptors.services.ReminderService;
 import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.ReminderRepo;
-import com.juggernauts.todoapp.services.ReminderService;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,6 +43,9 @@ class ReminderControllerTest {
      */
     @Test
     void testCreateNewReminder() throws Exception {
+        Date date = mock(Date.class);
+        when(date.getTime()).thenReturn(10L);
+
         User user = new User();
         user.setCategories(new ArrayList<>());
         user.setEmail("jane.doe@example.org");
@@ -65,18 +68,17 @@ class ReminderControllerTest {
 
         Task task = new Task();
         task.setCategory(category);
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
-        task.setCompleteBy(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+        task.setCompleteBy(null);
         task.setDescription("The characteristics of someone or something");
         task.setDone(true);
         task.setName("Name");
         task.setReminders(new ArrayList<>());
+        task.setRepeatEvery(1);
         task.setTaskId(123);
         task.setUser(user1);
 
         Reminder reminder = new Reminder();
-        LocalDateTime atStartOfDayResult1 = LocalDate.of(1970, 1, 1).atStartOfDay();
-        reminder.setRemindBy(Date.from(atStartOfDayResult1.atZone(ZoneId.of("UTC")).toInstant()));
+        reminder.setRemindBy(date);
         reminder.setReminderId(123);
         reminder.setRepeatEvery(1);
         reminder.setTask(task);

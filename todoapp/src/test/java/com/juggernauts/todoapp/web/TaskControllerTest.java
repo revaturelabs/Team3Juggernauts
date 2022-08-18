@@ -4,17 +4,14 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juggernauts.todoapp.configurations.interceptors.services.TaskService;
 import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.TaskRepo;
-import com.juggernauts.todoapp.services.TaskService;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -68,12 +65,12 @@ class TaskControllerTest {
 
         Task task = new Task();
         task.setCategory(category);
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
-        task.setCompleteBy(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+        task.setCompleteBy(LocalDate.ofEpochDay(1L));
         task.setDescription("The characteristics of someone or something");
         task.setDone(true);
         task.setName("Name");
         task.setReminders(new ArrayList<>());
+        task.setRepeatEvery(1);
         task.setTaskId(123);
         task.setUser(user1);
         Optional<Task> ofResult = Optional.of(task);
@@ -101,12 +98,12 @@ class TaskControllerTest {
 
         Task task1 = new Task();
         task1.setCategory(category1);
-        LocalDateTime atStartOfDayResult1 = LocalDate.of(1970, 1, 1).atStartOfDay();
-        task1.setCompleteBy(Date.from(atStartOfDayResult1.atZone(ZoneId.of("UTC")).toInstant()));
+        task1.setCompleteBy(null);
         task1.setDescription("The characteristics of someone or something");
         task1.setDone(true);
         task1.setName("Name");
         task1.setReminders(new ArrayList<>());
+        task1.setRepeatEvery(1);
         task1.setTaskId(123);
         task1.setUser(user3);
         String content = (new ObjectMapper()).writeValueAsString(task1);
@@ -120,10 +117,10 @@ class TaskControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.content()
                         .string(
-                                "{\"taskId\":123,\"name\":\"Name\",\"completeBy\":0,\"description\":\"The characteristics of someone or"
-                                        + " something\",\"user\":{\"id\":1,\"password\":\"iloveyou\",\"email\":\"jane.doe@example.org\",\"emailVerified\":true"
-                                        + ",\"categories\":[]},\"category\":{\"categoryId\":123,\"categoryName\":\"Category Name\"},\"reminders\":[],\"done\""
-                                        + ":true}"));
+                                "{\"taskId\":123,\"name\":\"Name\",\"completeBy\":null,\"description\":\"The characteristics of someone or"
+                                        + " something\",\"repeatEvery\":1,\"user\":{\"id\":1,\"password\":\"iloveyou\",\"email\":\"jane.doe@example.org\","
+                                        + "\"emailVerified\":true,\"categories\":[]},\"category\":{\"categoryId\":123,\"categoryName\":\"Category"
+                                        + " Name\"},\"reminders\":[],\"done\":true}"));
     }
 
     /**
@@ -155,12 +152,12 @@ class TaskControllerTest {
 
         Task task = new Task();
         task.setCategory(category);
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
-        task.setCompleteBy(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+        task.setCompleteBy(null);
         task.setDescription("The characteristics of someone or something");
         task.setDone(true);
         task.setName("Name");
         task.setReminders(new ArrayList<>());
+        task.setRepeatEvery(1);
         task.setTaskId(123);
         task.setUser(user1);
         String content = (new ObjectMapper()).writeValueAsString(task);

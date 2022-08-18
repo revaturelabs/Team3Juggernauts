@@ -1,4 +1,4 @@
-package com.juggernauts.todoapp.services;
+package com.juggernauts.todoapp.configurations.interceptors.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.any;
