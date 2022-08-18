@@ -7,10 +7,10 @@ import com.juggernauts.todoapp.clients.MailgunClient;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.EmailVerificationRepo;
 import com.juggernauts.todoapp.repos.UserRepo;
-import com.juggernauts.todoapp.configurations.interceptors.services.EmailVerificationService;
-import com.juggernauts.todoapp.configurations.interceptors.services.MailService;
-import com.juggernauts.todoapp.configurations.interceptors.services.TokenGenerationService;
-import com.juggernauts.todoapp.configurations.interceptors.services.UserService;
+import com.juggernauts.todoapp.services.EmailVerificationService;
+import com.juggernauts.todoapp.services.MailService;
+import com.juggernauts.todoapp.services.UserService;
+import com.juggernauts.todoapp.utils.Tokens;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @ContextConfiguration(classes = {LoginController.class, EmailVerificationService.class, MailService.class,
-        TokenGenerationService.class, UserService.class})
+        Tokens.class, UserService.class})
 @ActiveProfiles({"josh"})
 @ExtendWith(SpringExtension.class)
 class LoginControllerTest {

@@ -1,4 +1,4 @@
-package com.juggernauts.todoapp.configurations.interceptors.services;
+package com.juggernauts.todoapp.services;
 
 import java.net.URI;
 

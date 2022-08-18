@@ -16,7 +16,7 @@ import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.CategoryRepo;
-import com.juggernauts.todoapp.configurations.interceptors.services.CategoryService;
+import com.juggernauts.todoapp.services.CategoryService;
 
 import java.security.InvalidParameterException;
 

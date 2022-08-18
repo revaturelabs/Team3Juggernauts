@@ -8,7 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.juggernauts.todoapp.configurations.interceptors.services.EmailVerificationService;
+import com.juggernauts.todoapp.services.EmailVerificationService;
 import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.EmailVerificationRepo;

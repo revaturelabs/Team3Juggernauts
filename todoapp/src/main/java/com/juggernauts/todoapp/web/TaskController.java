@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
-import com.juggernauts.todoapp.configurations.interceptors.services.TaskService;
+import com.juggernauts.todoapp.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

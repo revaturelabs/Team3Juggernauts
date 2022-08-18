@@ -581,7 +581,7 @@ class TaskControllerTest {
         //   Diffblue Cover tried to run the arrange/act section, but the method under
         //   test threw
         //   java.lang.NullPointerException
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.lambda$getTasks$0(TaskService.java:35)
+        //       at com.juggernauts.todoapp.services.TaskService.lambda$getTasks$0(TaskService.java:35)
         //       at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:174)
         //       at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
         //       at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
@@ -589,7 +589,7 @@ class TaskControllerTest {
         //       at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
         //       at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
         //       at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.getTasks(TaskService.java:36)
+        //       at com.juggernauts.todoapp.services.TaskService.getTasks(TaskService.java:36)
         //       at com.juggernauts.todoapp.web.TaskController.viewAllTasks(TaskController.java:55)
         //   In order to prevent viewAllTasks(HttpServletRequest)
         //   from throwing NullPointerException, add constructors or factory
@@ -1037,8 +1037,8 @@ class TaskControllerTest {
         //   Diffblue Cover tried to run the arrange/act section, but the method under
         //   test threw
         //   java.util.NoSuchElementException
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.getTasks(TaskService.java:38)
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.getAllTasksPerCategory(TaskService.java:47)
+        //       at com.juggernauts.todoapp.services.TaskService.getTasks(TaskService.java:38)
+        //       at com.juggernauts.todoapp.services.TaskService.getAllTasksPerCategory(TaskService.java:47)
         //       at com.juggernauts.todoapp.web.TaskController.viewAllTasksByCategory(TaskController.java:73)
         //   In order to prevent viewAllTasksByCategory(HttpServletRequest)
         //   from throwing NoSuchElementException, add constructors or factory
@@ -1076,7 +1076,7 @@ class TaskControllerTest {
         //   Diffblue Cover tried to run the arrange/act section, but the method under
         //   test threw
         //   java.lang.NullPointerException
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.lambda$getTasks$0(TaskService.java:35)
+        //       at com.juggernauts.todoapp.services.TaskService.lambda$getTasks$0(TaskService.java:35)
         //       at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:174)
         //       at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1384)
         //       at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
@@ -1084,8 +1084,8 @@ class TaskControllerTest {
         //       at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
         //       at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
         //       at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.getTasks(TaskService.java:36)
-        //       at com.juggernauts.todoapp.configurations.interceptors.services.TaskService.getAllTasksPerCategory(TaskService.java:47)
+        //       at com.juggernauts.todoapp.services.TaskService.getTasks(TaskService.java:36)
+        //       at com.juggernauts.todoapp.services.TaskService.getAllTasksPerCategory(TaskService.java:47)
         //       at com.juggernauts.todoapp.web.TaskController.viewAllTasksByCategory(TaskController.java:73)
         //   In order to prevent viewAllTasksByCategory(HttpServletRequest)
         //   from throwing NullPointerException, add constructors or factory

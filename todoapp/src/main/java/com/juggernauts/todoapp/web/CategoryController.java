@@ -2,7 +2,7 @@ package com.juggernauts.todoapp.web;
 
 import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.User;
-import com.juggernauts.todoapp.configurations.interceptors.services.CategoryService;
+import com.juggernauts.todoapp.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

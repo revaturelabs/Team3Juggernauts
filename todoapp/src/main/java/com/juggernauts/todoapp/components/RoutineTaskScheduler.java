@@ -1,8 +1,8 @@
 package com.juggernauts.todoapp.components;
 
-import com.juggernauts.todoapp.configurations.interceptors.services.MailService;
-import com.juggernauts.todoapp.configurations.interceptors.services.ReminderService;
-import com.juggernauts.todoapp.configurations.interceptors.services.TaskService;
+import com.juggernauts.todoapp.services.MailService;
+import com.juggernauts.todoapp.services.ReminderService;
+import com.juggernauts.todoapp.services.TaskService;
 import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.repos.TaskRepo;

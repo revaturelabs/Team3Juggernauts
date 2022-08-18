@@ -8,8 +8,8 @@ import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.EmailVerificationRepo;
 import com.juggernauts.todoapp.repos.UserRepo;
-import com.juggernauts.todoapp.configurations.interceptors.services.EmailVerificationService;
-import com.juggernauts.todoapp.configurations.interceptors.services.UserService;
+import com.juggernauts.todoapp.services.EmailVerificationService;
+import com.juggernauts.todoapp.services.UserService;
 
 import java.util.ArrayList;
 

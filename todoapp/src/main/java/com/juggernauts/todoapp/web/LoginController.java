@@ -14,8 +14,8 @@ import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.services.EmailVerificationService;
 import com.juggernauts.todoapp.services.MailService;
-import com.juggernauts.todoapp.services.TokenGenerationService;
 import com.juggernauts.todoapp.services.UserService;
+import com.juggernauts.todoapp.utils.Tokens;
 
 /**
  * Represents a RESTController handling mappings for the login endpoint
