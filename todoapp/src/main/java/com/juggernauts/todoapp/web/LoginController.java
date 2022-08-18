@@ -17,6 +17,9 @@ import com.juggernauts.todoapp.services.MailService;
 import com.juggernauts.todoapp.services.UserService;
 import com.juggernauts.todoapp.utils.Tokens;
 
+import feign.FeignException;
+import feign.FeignException.Forbidden;
+
 /**
  * Represents a RESTController handling mappings for the login endpoint
  * @author Jacob
@@ -81,11 +84,16 @@ public class LoginController {
 
         // send user a welcome email with an email verification URL
         String verificationURL = Tokens.generateTokenURL(request, user, token);
-        mailService.sendEmail(
-            user.getEmail(), 
-            "Welcome to habitu.al!", 
-            String.format("You have successfully registered to habitu.al. Click this link to verify your email: %s", verificationURL)
-        );
+
+        try {
+            mailService.sendEmail(
+                user.getEmail(), 
+                "Welcome to habitu.al!", 
+                String.format("You have successfully registered to habitu.al. Click this link to verify your email: %s", verificationURL)
+            );
+        } catch (Forbidden exc) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Your e-mail must be registered with Mailgun.");
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Welcome.");
     }
