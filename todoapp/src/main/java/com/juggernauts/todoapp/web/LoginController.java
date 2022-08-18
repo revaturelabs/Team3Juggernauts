@@ -73,14 +73,9 @@ public class LoginController {
         // make sure theres no users with the input email
         if (userService.getUser(user.getEmail()) != null)
             return ResponseEntity.badRequest().body("This email is taken.");
-    
-        // registration is successful, add user to DB
-        userService.addUser(user);
 
         // add email verification to the DB
         String token = Tokens.generateToken(user);
-        EmailVerification ev = new EmailVerification(token, user);
-        emailVerificationService.addEmailVerification(ev);
 
         // send user a welcome email with an email verification URL
         String verificationURL = Tokens.generateTokenURL(request, user, token);
@@ -94,6 +89,11 @@ public class LoginController {
         } catch (Forbidden exc) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Your e-mail must be registered with Mailgun.");
         }
+    
+        // registration is successful, add user to DB
+        userService.addUser(user);
+        EmailVerification ev = new EmailVerification(token, user);
+        emailVerificationService.addEmailVerification(ev);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Welcome.");
     }
