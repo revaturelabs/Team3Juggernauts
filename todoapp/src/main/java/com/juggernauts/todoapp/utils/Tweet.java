@@ -16,7 +16,7 @@ public class Tweet {
 
     public Tweet(){}
 
-    String tw = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
+    public String tw = "I stay on task with the ToDoApp from Habit.ual. Download the app today!";
 
 
     public String shareApp(String tw){
