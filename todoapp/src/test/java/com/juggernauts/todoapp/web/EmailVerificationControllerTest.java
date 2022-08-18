@@ -1,5 +1,8 @@
 package com.juggernauts.todoapp.web;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.User;
@@ -61,6 +64,49 @@ class EmailVerificationControllerTest {
                 .build()
                 .perform(requestBuilder);
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(405));
+    }
+
+    /**
+     * Method under test: {@link EmailVerificationController#verifyEmail(int, String)}
+     */
+    @Test
+    void testVerifyEmail() throws Exception {
+        User user = new User();
+        user.setCategories(new ArrayList<>());
+        user.setEmail("jane.doe@example.org");
+        user.setEmailVerified(true);
+        user.setId(1);
+        user.setPassword("iloveyou");
+
+        EmailVerification emailVerification = new EmailVerification();
+        emailVerification.setToken("ABC123");
+        emailVerification.setTokenId(123);
+        emailVerification.setUser(user);
+        when(emailVerificationRepo.findOne((User) any(), (String) any())).thenReturn(emailVerification);
+
+        User user1 = new User();
+        user1.setCategories(new ArrayList<>());
+        user1.setEmail("jane.doe@example.org");
+        user1.setEmailVerified(true);
+        user1.setId(1);
+        user1.setPassword("iloveyou");
+
+        User user2 = new User();
+        user2.setCategories(new ArrayList<>());
+        user2.setEmail("jane.doe@example.org");
+        user2.setEmailVerified(true);
+        user2.setId(1);
+        user2.setPassword("iloveyou");
+        when(userRepo.save((User) any())).thenReturn(user2);
+        when(userRepo.getReferenceById((Integer) any())).thenReturn(user1);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/verify/{userId}/{token}", 123,
+                "ABC123");
+        MockMvcBuilders.standaloneSetup(emailVerificationController)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("text/plain;charset=ISO-8859-1"))
+                .andExpect(MockMvcResultMatchers.content().string("Your email has been verified."));
     }
 }
 

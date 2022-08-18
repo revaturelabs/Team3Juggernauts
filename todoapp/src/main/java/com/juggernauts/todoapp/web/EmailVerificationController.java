@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailVerificationController {
     private static final Logger logger = LogManager.getLogger(EmailVerificationController.class);
     @Autowired EmailVerificationService emailVerificationService;
+
     @Autowired UserService userService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
