@@ -64,7 +64,6 @@ public class LoginController {
     public ResponseEntity<String> register(@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         // if the session has a user attributed to it already, then they must be logged in
-        System.out.println(user);
         if (session.getAttribute("USER") != null)
             return ResponseEntity.badRequest().body("You are already logged in.");
 
