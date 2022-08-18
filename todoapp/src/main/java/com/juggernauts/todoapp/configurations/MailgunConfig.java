@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import com.juggernauts.todoapp.services.PropertiesFileLoaderService;
+import com.juggernauts.todoapp.configurations.interceptors.services.PropertiesFileLoaderService;
 
 import feign.Contract;
 import feign.auth.BasicAuthRequestInterceptor;

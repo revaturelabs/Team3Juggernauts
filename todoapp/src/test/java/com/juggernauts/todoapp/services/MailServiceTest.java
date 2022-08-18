@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.juggernauts.todoapp.clients.MailgunClient;
+import com.juggernauts.todoapp.configurations.interceptors.services.MailService;
 import com.juggernauts.todoapp.models.MailgunResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

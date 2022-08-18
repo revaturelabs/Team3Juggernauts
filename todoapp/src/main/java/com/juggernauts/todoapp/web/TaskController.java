@@ -2,17 +2,15 @@ package com.juggernauts.todoapp.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.juggernauts.todoapp.models.Reminder;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
-import com.juggernauts.todoapp.repos.TaskRepo;
-import com.juggernauts.todoapp.services.ReminderService;
-import com.juggernauts.todoapp.services.TaskService;
+import com.juggernauts.todoapp.configurations.interceptors.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,10 +28,10 @@ public class TaskController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createNewTask(@RequestBody Task task) {
+    public ResponseEntity createNewTask(@RequestBody Task task, HttpServletRequest request) {
 
         // Will be removed after currentUser is implemented
-        User currentUser = new User(1, "testpass1", "test1");
+        User currentUser = (User) request.getSession().getAttribute("USER");
 
         try {
             // This will all STAY once currentUser is available from userSession
@@ -48,9 +46,9 @@ public class TaskController {
 
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity viewAllTasks()  {
+    public ResponseEntity viewAllTasks(@RequestBody HttpServletRequest request)  {
         // Testing
-        User currentUser = new User(1, "testpass1", "test1");
+        User currentUser = (User) request.getSession().getAttribute("USER");
 
         try {
             List<Task> usersTasks;
@@ -68,9 +66,9 @@ public class TaskController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping("/viewcategory")
-    public ResponseEntity viewAllTasksByCategory() {
+    public ResponseEntity viewAllTasksByCategory(@RequestBody HttpServletRequest request) {
         // Testing
-        User currentUser = new User(1, "testpass1", "test1");
+        User currentUser = (User) request.getSession().getAttribute("USER");
 
         HashMap<String, List<Task>> tasksPerCategory = taskService.getAllTasksPerCategory(currentUser);
         return ResponseEntity.ok(tasksPerCategory);

@@ -1,4 +1,4 @@
-package com.juggernauts.todoapp.services;
+package com.juggernauts.todoapp.configurations.interceptors.services;
 
 import java.util.Base64;
 

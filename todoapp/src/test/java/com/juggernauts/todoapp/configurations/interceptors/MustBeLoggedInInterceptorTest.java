@@ -1,5 +1,8 @@
 package com.juggernauts.todoapp.configurations.interceptors;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +10,8 @@ import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 
 class MustBeLoggedInInterceptorTest {
     /**
@@ -66,6 +71,32 @@ class MustBeLoggedInInterceptorTest {
 
         MustBeLoggedInInterceptor mustBeLoggedInInterceptor = new MustBeLoggedInInterceptor();
         mustBeLoggedInInterceptor.preHandle(null, new Response(), "Handler");
+    }
+
+    /**
+     * Method under test: {@link MustBeLoggedInInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)}
+     */
+    @Test
+    void testPreHandle3() throws Exception {
+        MustBeLoggedInInterceptor mustBeLoggedInInterceptor = new MustBeLoggedInInterceptor();
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+        assertFalse(
+                mustBeLoggedInInterceptor.preHandle(mockHttpServletRequest, new MockHttpServletResponse(), "Handler"));
+        assertTrue(mockHttpServletRequest.getSession() instanceof MockHttpSession);
+    }
+
+    /**
+     * Method under test: {@link MustBeLoggedInInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)}
+     */
+    @Test
+    void testPreHandle4() throws Exception {
+        MustBeLoggedInInterceptor mustBeLoggedInInterceptor = new MustBeLoggedInInterceptor();
+        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
+
+        MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
+        mockHttpServletResponse.setCommitted(true);
+        assertFalse(mustBeLoggedInInterceptor.preHandle(mockHttpServletRequest, mockHttpServletResponse, "Handler"));
+        assertTrue(mockHttpServletRequest.getSession() instanceof MockHttpSession);
     }
 }
 

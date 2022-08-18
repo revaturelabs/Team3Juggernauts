@@ -3,6 +3,7 @@ package com.juggernauts.todoapp.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,10 +30,13 @@ public class Task {
     private boolean isDone;
 
     @Column(name = "complete_by", columnDefinition = "DATE")
-    private Date completeBy;
+    private LocalDate completeBy;
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column(columnDefinition = "REPEAT_EVERY")
+    private int repeatEvery;
 
     // RELATIONAL FIELDS
 
@@ -73,7 +77,7 @@ public class Task {
         this.name = name;
     }
 
-    public Task(String name, Date completeBy, User user) {
+    public Task(String name, LocalDate completeBy, User user) {
         this.name = name;
         this.completeBy = completeBy;
         this.user = user;
@@ -85,7 +89,7 @@ public class Task {
         this.user = user;
     }
 
-    public Task(String name, Date completeBy, String description, User user) {
+    public Task(String name, LocalDate completeBy, String description, User user) {
         this.name = name;
         this.completeBy = completeBy;
         this.description = description;

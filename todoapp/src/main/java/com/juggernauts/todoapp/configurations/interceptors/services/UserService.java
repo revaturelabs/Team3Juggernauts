@@ -1,4 +1,4 @@
-package com.juggernauts.todoapp.services;
+package com.juggernauts.todoapp.configurations.interceptors.services;
 
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.repos.UserRepo;

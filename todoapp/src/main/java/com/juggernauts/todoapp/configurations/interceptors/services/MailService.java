@@ -1,4 +1,4 @@
-package com.juggernauts.todoapp.services;
+package com.juggernauts.todoapp.configurations.interceptors.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

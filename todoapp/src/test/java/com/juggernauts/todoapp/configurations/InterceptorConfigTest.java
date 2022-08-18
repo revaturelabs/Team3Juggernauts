@@ -1,5 +1,12 @@
 package com.juggernauts.todoapp.configurations;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import com.juggernauts.todoapp.configurations.interceptors.MustBeLoggedInInterceptor;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 @ContextConfiguration(classes = {InterceptorConfig.class})
@@ -51,6 +60,18 @@ class InterceptorConfigTest {
         //   See https://diff.blue/R013 to resolve this issue.
 
         interceptorConfig.addInterceptors(null);
+    }
+
+    /**
+     * Method under test: {@link InterceptorConfig#addInterceptors(InterceptorRegistry)}
+     */
+    @Test
+    void testAddInterceptors3() {
+        InterceptorRegistry interceptorRegistry = mock(InterceptorRegistry.class);
+        when(interceptorRegistry.addInterceptor((HandlerInterceptor) any()))
+                .thenReturn(new InterceptorRegistration(new MustBeLoggedInInterceptor()));
+        interceptorConfig.addInterceptors(interceptorRegistry);
+        verify(interceptorRegistry, atLeast(1)).addInterceptor((HandlerInterceptor) any());
     }
 }
 

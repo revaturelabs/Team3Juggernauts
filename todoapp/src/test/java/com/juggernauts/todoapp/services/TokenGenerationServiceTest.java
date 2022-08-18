@@ -2,6 +2,7 @@ package com.juggernauts.todoapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.juggernauts.todoapp.configurations.interceptors.services.TokenGenerationService;
 import com.juggernauts.todoapp.models.User;
 
 import java.util.ArrayList;
