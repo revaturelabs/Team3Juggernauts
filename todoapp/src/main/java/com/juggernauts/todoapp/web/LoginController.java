@@ -60,9 +60,9 @@ public class LoginController {
      * @param request The request information
      * @return A string message showing whether the registration was successful
      */
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/register")
-
-    public ResponseEntity<String> register(@RequestBody User user, HttpServletRequest request) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping("register")
+    public ResponseEntity register(@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         // if the session has a user attributed to it already, then they must be logged in
         System.out.println(user);
