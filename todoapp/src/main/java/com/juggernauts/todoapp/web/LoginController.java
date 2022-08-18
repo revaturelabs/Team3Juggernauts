@@ -14,8 +14,8 @@ import com.juggernauts.todoapp.models.EmailVerification;
 import com.juggernauts.todoapp.models.User;
 import com.juggernauts.todoapp.services.EmailVerificationService;
 import com.juggernauts.todoapp.services.MailService;
-import com.juggernauts.todoapp.services.TokenGenerationService;
 import com.juggernauts.todoapp.services.UserService;
+import com.juggernauts.todoapp.utils.Tokens;
 
 /**
  * Represents a RESTController handling mappings for the login endpoint
@@ -25,7 +25,6 @@ import com.juggernauts.todoapp.services.UserService;
 public class LoginController {
     @Autowired private UserService userService;
     @Autowired private MailService mailService;
-    @Autowired private TokenGenerationService tokenGenerationService;
     @Autowired private EmailVerificationService emailVerificationService;
 
     /**
@@ -77,17 +76,16 @@ public class LoginController {
         userService.addUser(user);
 
         // add email verification to the DB
-        String token = tokenGenerationService.generateUserToken(user);
+        String token = Tokens.generateToken(user);
         EmailVerification ev = new EmailVerification(token, user);
         emailVerificationService.addEmailVerification(ev);
 
         // send user a welcome email with an email verification URL
-        String verificationURL = String.format("%s://%s:%d/verify/%d/%s", request.getScheme(), request.getServerName(), request.getServerPort(), user.getId(), token);
-        mailService.sendEmail(
-            user.getEmail(), 
-            "Welcome to habitu.al!", 
-            String.format("You have successfully registered to habitu.al. Click this link to verify your email: %s", verificationURL)
-        );
+        String verificationURL = Tokens.generateTokenURL(request, user, token);
+        //mailService.sendEmail(
+//            user.getEmail();
+//            "Welcome to habitu.al!"
+//            String.format("You have successfully registered to habitu.al. Click this link to verify your email: %s", verificationURL);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Welcome.");
     }

@@ -74,7 +74,7 @@ class TaskControllerTest {
         task.setDone(true);
         task.setName("Name");
         task.setReminders(new ArrayList<>());
-        task.setRepeatEvery(1);
+       // task.setRepeatEvery(1);
         task.setTaskId(123);
         task.setUser(user1);
 

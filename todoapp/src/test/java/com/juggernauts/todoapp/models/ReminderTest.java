@@ -55,12 +55,12 @@ class ReminderTest {
         user1.setPassword("iloveyou");
         Task task = new Task();
         task.setCategory(category);
-        task.setCompleteBy(LocalDate.ofEpochDay(1L));
+        //task.setCompleteBy(LocalDate.ofEpochDay(1L));
         task.setDescription("The characteristics of someone or something");
         task.setDone(true);
         task.setName("Name");
         task.setReminders(new ArrayList<>());
-        task.setRepeatEvery(1);
+        //task.setRepeatEvery(1);
         task.setTaskId(123);
         task.setUser(user1);
         actualReminder.setTask(task);
@@ -114,12 +114,12 @@ class ReminderTest {
 
         Task task = new Task();
         task.setCategory(category);
-        task.setCompleteBy(LocalDate.ofEpochDay(1L));
+       // task.setCompleteBy(LocalDate.ofEpochDay(1L));
         task.setDescription("The characteristics of someone or something");
         task.setDone(true);
         task.setName("Name");
         task.setReminders(new ArrayList<>());
-        task.setRepeatEvery(1);
+       // task.setRepeatEvery(1);
         task.setTaskId(123);
         task.setUser(user1);
         Reminder actualReminder = new Reminder(123, remindBy, 1, task);
@@ -147,12 +147,12 @@ class ReminderTest {
         user3.setPassword("iloveyou");
         Task task1 = new Task();
         task1.setCategory(category1);
-        task1.setCompleteBy(LocalDate.ofEpochDay(1L));
+       // task1.setCompleteBy(LocalDate.ofEpochDay(1L));
         task1.setDescription("The characteristics of someone or something");
         task1.setDone(true);
         task1.setName("Name");
         task1.setReminders(new ArrayList<>());
-        task1.setRepeatEvery(1);
+      //  task1.setRepeatEvery(1);
         task1.setTaskId(123);
         task1.setUser(user3);
         actualReminder.setTask(task1);

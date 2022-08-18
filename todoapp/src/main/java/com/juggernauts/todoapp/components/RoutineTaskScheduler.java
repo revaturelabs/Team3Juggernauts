@@ -21,7 +21,7 @@ import com.juggernauts.todoapp.services.ReminderService;
  */
 @Component
 public class RoutineTaskScheduler {
-    private static final Logger logger = LogManager.getLogger(ReminderScheduler.class);
+    //private static final Logger logger = LogManager.getLogger(ReminderScheduler.class);
 
     @Autowired private ReminderService reminderService;
     @Autowired private MailService mailService;
@@ -35,7 +35,7 @@ public class RoutineTaskScheduler {
         List<Reminder> outdatedReminders = reminderService.getAllOutdatedReminders();
         if (outdatedReminders.isEmpty()) return;
 
-        logger.info("running scheduleReminderNotifier cron job");
+       // logger.info("running scheduleReminderNotifier cron job");
 
         List<Reminder> deleteReminders = new ArrayList<>();
         Task reminderTask;
@@ -48,7 +48,7 @@ public class RoutineTaskScheduler {
             to = reminderTask.getUser().getEmail();
             subject = "Your Habitu.al Task Reminder";
             text = String.format("Your %s task is at %s.", reminderTask.getName(), reminderTask.getCompleteBy());
-            mailService.sendEmail(to, subject, text);
+           // mailService.sendEmail(to, subject, text);
 
             // if repeatEvery isn't null, then this is a repeatable reminder
             if (reminder.getRepeatEvery() != null) {
@@ -63,12 +63,12 @@ public class RoutineTaskScheduler {
                 deleteReminders.add(reminder);
             }
 
-            logger.info("reminded {} of {}", reminderTask.getUser().getEmail(), reminderTask.getName());
+            //logger.info("reminded {} of {}", reminderTask.getUser().getEmail(), reminderTask.getName());
         }
 
         // delete all the non-repeatable outdated reminders
         reminderService.deleteReminders(deleteReminders);
-        logger.info("deleted {} reminders", deleteReminders.size());
+       // logger.info("deleted {} reminders", deleteReminders.size());
     }
 
 
