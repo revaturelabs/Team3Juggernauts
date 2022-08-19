@@ -57,7 +57,7 @@ public class ReminderScheduler {
                 reminder.getRemindBy().setTime(reminder.getRemindBy().getTime() + reminder.getRepeatEvery() * 1000);
 
                 // this saves the reminder
-                reminderService.addReminder(reminder);
+                reminderService.addReminder(reminder, reminderTask.getTaskId());
             } else {
                 // queue reminder for later deletion since it's not repeatable
                 deleteReminders.add(reminder);
