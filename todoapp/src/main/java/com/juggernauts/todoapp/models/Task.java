@@ -106,6 +106,19 @@ public class Task {
         this.category = category;
     }
 
+    public Task(String name, LocalDate completeBy, int repeatEvery) {
+        this.name = name;
+        this.completeBy = completeBy;
+        this.repeatEvery = repeatEvery;
+    }
+
+    public Task(String name, LocalDate completeBy, String description, int repeatEvery) {
+        this.name = name;
+        this.completeBy = completeBy;
+        this.description = description;
+        this.repeatEvery = repeatEvery;
+    }
+
     @Override
     public String toString() {
         return "{NAME: "+ this.name +

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.repos.TaskRepo;
 import com.juggernauts.todoapp.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("task")
 public class TaskController {
 
+    @Autowired TaskRepo taskRepo;
     TaskService taskService;
     @Autowired
     public TaskController(TaskService taskService) {
@@ -36,6 +38,7 @@ public class TaskController {
         try {
             // This will all STAY once currentUser is available from userSession
             task.setUser(currentUser);
+            taskService.addTask(task);
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("An error occured.");
@@ -65,8 +68,8 @@ public class TaskController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping("/viewcategory")
-    public ResponseEntity viewAllTasksByCategory(@RequestBody HttpServletRequest request) {
+    @RequestMapping("viewcategory")
+    public ResponseEntity viewAllTasksByCategory(HttpServletRequest request) {
         // Testing
         User currentUser = (User) request.getSession().getAttribute("USER");
 
@@ -75,7 +78,7 @@ public class TaskController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping("/resolve")
+    @RequestMapping("resolve")
     public ResponseEntity completeTask(@RequestBody Task task) {
         System.out.println(task.getTaskId());
         int taskId = 0;
@@ -91,18 +94,14 @@ public class TaskController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping("/category")
-    public ResponseEntity changeCategory(@RequestBody Task task) {
+    @RequestMapping("category")
+    public ResponseEntity changeCategory(@RequestBody Task task, @RequestParam String categoryName) {
         System.out.println(task.getTaskId());
-        int taskId = 0;
-        String categoryName = "";
         try {
-            taskId = task.getTaskId();
-            categoryName = task.getCategory().getCategoryName();
-
             System.out.println("TaskID: ");
-            taskService.changeCategory(taskId, categoryName);
-            return ResponseEntity.ok(task);
+            Task returnedTask = taskService.changeCategory(task.getTaskId(), categoryName);
+
+            return ResponseEntity.ok(returnedTask);
         }
         catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().body(task.getTaskId());

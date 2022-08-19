@@ -5,12 +5,7 @@ spring:
     url: jdbc:postgresql://first-database.ca2hagivlgin.us-east-2.rds.amazonaws.com:5432/todo
     driver-class-name: org.postgresql.Driver
 
-#logging:
-#  level:
-#    org:
-#      hibernate:
-#        SQL: DEBUG
-#        type:
-#          descriptor:
-#            sql:
-#              BasicBinder: TRACE2
+mailgunUsername: ${MAILGUN_USER:api}
+mailgunPassword: ${MAILGUN_PASSWORD:e2cb072acd516698676e25ca9f4959e6-2bab6b06-28d7642b}
+mailgunUrl: ${MAILGUN_URL:https://api.mailgun.net/v3/sandbox2f4262e762e340fe926e9817e52a3ca1.mailgun.org}
+mailgunFrom: ${MAILGUN_FROM:Mailgun Sandbox <postmaster@sandbox2f4262e762e340fe926e9817e52a3ca1.mailgun.org>

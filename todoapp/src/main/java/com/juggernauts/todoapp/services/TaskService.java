@@ -3,16 +3,20 @@ package com.juggernauts.todoapp.services;
 import com.juggernauts.todoapp.models.Category;
 import com.juggernauts.todoapp.models.Task;
 import com.juggernauts.todoapp.models.User;
+import com.juggernauts.todoapp.repos.CategoryRepo;
 import com.juggernauts.todoapp.repos.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
+    @Autowired
+    CategoryRepo categoryRepo;
     private TaskRepo taskRepo;
 
     @Autowired
@@ -99,8 +103,17 @@ public class TaskService {
         taskRepo.save(task);
     }
 
-    public void changeCategory(int taskId, String categoryName) throws NoSuchElementException {
+    public Task changeCategory(int taskId, String categoryName) throws NoSuchElementException {
+        System.out.println("CATEGORY NAME: "+categoryName);
         Task task = taskRepo.findById(taskId).orElseThrow(NoSuchElementException::new);
-        task.setCategory(new Category());
+        try {
+            Category category = categoryRepo.findOne(categoryName);
+            task.setCategory(category);
+            taskRepo.save(task);
+            return task;
+        }
+        catch (Exception e) {
+            throw new NoSuchElementException ();
+        }
     }
 }
