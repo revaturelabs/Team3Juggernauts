@@ -13,5 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class TodoappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TodoappApplication.class, args);
+		System.out.println('hello');
 	}
 }
