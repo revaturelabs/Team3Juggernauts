@@ -15,9 +15,8 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-    public String addUser(User user) {
-        userRepo.save(user);
-        return user.toString();
+    public User addUser(User user) {
+        return userRepo.save(user);
     }
 
     public List<User> getAllUsers() {

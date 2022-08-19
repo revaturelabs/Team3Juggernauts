@@ -38,21 +38,23 @@ public class LoginController {
      * @param request The request information
      * @return A string message showing whether the login was successful
      */
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping("/login")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/login")
     public ResponseEntity<String> login(@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         if (session.getAttribute("USER") != null)
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You are already logged in.");
 
         // get user by the email
-        User gottenUser = userService.getUser(user.getEmail());
+        User gotUser = userService.getUser(user.getEmail());
 
         // invalid password
-        if (user == null || !user.getPassword().equals(user.getPassword()))
+        if (gotUser == null || !gotUser.getPassword().equals(user.getPassword()))
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login details.");
 
-        session.setAttribute("USER", user);
+        if (!gotUser.isEmailVerified())
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are not verified.");
+
+        session.setAttribute("USER", gotUser);
         return ResponseEntity.accepted().body("You have logged in.");
     }
 
@@ -63,9 +65,9 @@ public class LoginController {
      * @return A string message showing whether the registration was successful
      */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/register")
-
     public ResponseEntity<String> register(@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
+
         // if the session has a user attributed to it already, then they must be logged in
         if (session.getAttribute("USER") != null)
             return ResponseEntity.badRequest().body("You are already logged in.");
@@ -73,6 +75,8 @@ public class LoginController {
         // make sure theres no users with the input email
         if (userService.getUser(user.getEmail()) != null)
             return ResponseEntity.badRequest().body("This email is taken.");
+
+        user = userService.addUser(user);
 
         // add email verification to the DB
         String token = Tokens.generateToken(user);
