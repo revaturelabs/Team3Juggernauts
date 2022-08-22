@@ -24,7 +24,6 @@ Key technologies and dependencies used in this project:
 - Java
 - Java Time API 
 - Maven
-- Spring JPA with Hibernate
 - Spring/ Spring Boot Framework
 - H2 Database
 - Java Collections API
